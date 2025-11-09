@@ -260,4 +260,7 @@ public static class LocationNames
     public const string Materium__Magnetite = "Materium-Magnetite";
 
     // TODO: Styx/Skynx
+
+    // Novelty/cursed locations
+    public const string Flea_Shop = "Flea_Shop";  // threshold shop; should consume the fleatopia tool pouch location
 }
