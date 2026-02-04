@@ -3,6 +3,7 @@ using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using ItemChanger.Containers;
 using ItemChanger.Extensions;
+using ItemChanger.Placements;
 using ItemChanger.Silksong.Components;
 using ItemChanger.Silksong.Extensions;
 using ItemChanger.Silksong.FsmStateActions;
@@ -120,15 +121,14 @@ public class FleaContainer : Container
 
     public override void ModifyContainerInPlace(GameObject obj, ContainerInfo info)
     {
-        OriginalFleaTypeTag tag = info.GiveInfo.Placement
-            .GetPlacementAndLocationTags()
-            .OfType<OriginalFleaTypeTag>()
-            .SingleOrDefault();
-
-        if (tag == null)
+        if (info.GiveInfo.Placement is not IPrimaryLocationPlacement pmt)
         {
-            throw new InvalidOperationException($"No original flea container tag on {obj.name}" +
-                $"for placement {info.GiveInfo.Placement.Name}");
+            throw new ArgumentException($"Expected an {nameof(IPrimaryLocationPlacement)} for {info.GiveInfo.Placement.Name}");
+        }
+
+        if (pmt.Location.GetTag<OriginalFleaTypeTag>() is not OriginalFleaTypeTag tag)
+        {
+            throw new InvalidOperationException($"No original flea container tag for placement {info.GiveInfo.Placement.Name}");
         }
 
         FleaContainerType fleaType = tag.FleaContainerType;
@@ -217,7 +217,7 @@ public class FleaContainer : Container
     }
 
     protected override void Load()
-    { 
+    {
         foreach (FleaPrefabData data in _prefabs.Values)
         {
             data.Prefab.Load();
