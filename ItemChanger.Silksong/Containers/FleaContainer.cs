@@ -42,7 +42,7 @@ public enum FleaContainerType
     /// </summary>
     CitadelCage,
     /// <summary>
-    /// Trapped in black silk. Sleeping prior to act 3.
+    /// Trapped in black silk.
     /// </summary>
     BlackSilk,
     /// <summary>
@@ -65,7 +65,7 @@ public enum FleaContainerType
 
 
 /// <summary>
-/// Container representing a flea trapped in a barrel.
+/// Container representing a flea.
 /// </summary>
 public class FleaContainer : Container
 {
@@ -245,24 +245,5 @@ public class FleaContainer : Container
             data.Prefab.Unload();
         }
         FleasSavedItem.Unload();
-    }
-}
-
-// TODO - update IC.Core
-file static class Ext
-{
-    /// <summary>
-    /// Create a new game object which is a parent to <paramref name="self"/>,
-    /// such that the offset of self relative to the new object is equal to
-    /// <paramref name="localOffset"/>.
-    /// </summary>
-    public static GameObject WithLocalOffset(this GameObject self, Vector3 localOffset)
-    {
-        GameObject newParent = self.scene.NewGameObject();
-        newParent.name = $"{self.name} offset";
-        self.transform.parent = newParent.transform;
-        self.transform.localPosition = localOffset;  // Not sure if this is more useful with or without a minus sign
-
-        return newParent;
     }
 }
