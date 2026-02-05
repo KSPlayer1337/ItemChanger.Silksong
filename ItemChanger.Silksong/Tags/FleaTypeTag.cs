@@ -15,7 +15,7 @@ public class OriginalFleaTypeTag : Tag
 }
 
 /// <summary>
-/// Tag indicating that an item is requesting to be given a particular container type.
+/// Tag indicating that an item is requesting to be given a particular flea type.
 /// </summary>
 [ItemTag]
 public class ItemFleaTypeTag : Tag

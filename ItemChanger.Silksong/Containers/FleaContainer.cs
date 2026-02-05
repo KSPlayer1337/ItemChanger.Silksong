@@ -94,6 +94,10 @@ public class FleaContainer : Container
     };
 
     // TODO - add support for more prefabs
+    // Note. I think that the only one it is realistic to support is the
+    // SlabCage, to support a "hanging" capability. This would still require work,
+    // as the flea's chain is longer than many hanging checks.
+    // That said the aspid container might be fun to include, and maybe others
     
     /// <summary>
     /// Managed asset for the fleas collected item.

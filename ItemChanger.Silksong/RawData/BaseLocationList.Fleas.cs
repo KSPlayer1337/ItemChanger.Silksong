@@ -54,7 +54,7 @@ internal static partial class BaseLocationList
     }
 
     public static Location Flea__dust_12 => CreateFleaLocation(
-        LocationNames.Flea__dust_12,
+        LocationNames.Flea__Sinner_s_Road,
         SceneNames.Dust_12,
         "Flea Rescue Sleeping",
         FleaContainerType.Sleeping,
@@ -62,7 +62,7 @@ internal static partial class BaseLocationList
     );
 
     public static Location Flea__greymoor_06 => CreateFleaLocation(
-        LocationNames.Flea__greymoor_06,
+        LocationNames.Flea__Greymoor_West,
         SceneNames.Greymoor_06,
         "Flea Rescue Sleeping",
         FleaContainerType.Sleeping,
@@ -70,7 +70,7 @@ internal static partial class BaseLocationList
     );
 
     public static Location Flea__song_11 => CreateFleaLocation(
-        LocationNames.Flea__song_11,
+        LocationNames.Flea__Songclave_Wind_Column,
         SceneNames.Song_11,
         "Flea Rescue Sleeping",
         FleaContainerType.Sleeping,
@@ -78,7 +78,7 @@ internal static partial class BaseLocationList
         );
 
     public static Location Flea__bone_east_05 => CreateFleaLocation(
-        LocationNames.Flea__bone_east_05,
+        LocationNames.Flea__Docks_Upper,
         SceneNames.Bone_East_05,
         "Flea Rescue Barrel",
         FleaContainerType.Barrel,
@@ -86,7 +86,7 @@ internal static partial class BaseLocationList
         );
 
     public static Location Flea__crawl_06 => CreateFleaLocation(
-        LocationNames.Flea__crawl_06,
+        LocationNames.Flea__Wormways_Aknid,
         SceneNames.Crawl_06,
         "Aspid Collector (3)",
         FleaContainerType.Aspid,
@@ -94,7 +94,7 @@ internal static partial class BaseLocationList
         );
 
     public static Location Flea__belltown_04 => CreateFleaLocation(
-        LocationNames.Flea__belltown_04,
+        LocationNames.Flea__Bellhart_Upper,
         SceneNames.Belltown_04,
         "Bell Wall Flea/Flea Rescue Generic",
         FleaContainerType.GenericWall,
@@ -105,16 +105,16 @@ internal static partial class BaseLocationList
     // TODO - make sure this works (false location is replaced) post-IC.Core v0.5.0
     public static Location Flea__dock_16 => new DualLocation()
     {
-        Name = LocationNames.Flea__dock_16,
+        Name = LocationNames.Flea__Docks_Bellway,
         TrueLocation = CreateFleaLocation(
-            LocationNames.Flea__dock_16,
+            LocationNames.Flea__Docks_Bellway,
             SceneNames.Dock_16,
             "Flea Rescue BlackSilk",
             FleaContainerType.BlackSilk,
             replaceable: false
         ),
         FalseLocation = CreateFleaLocation(
-            LocationNames.Flea__dock_16,
+            LocationNames.Flea__Docks_Bellway,
             SceneNames.Dock_16,
             "Flea Rescue Sleeping",
             FleaContainerType.Sleeping,
@@ -125,16 +125,16 @@ internal static partial class BaseLocationList
 
     public static Location Flea__bone_east_10_church => new DualLocation()
     {
-        Name = LocationNames.Flea__bone_east_10_church,
+        Name = LocationNames.Flea__Pilgrim_s_Rest,
         TrueLocation = CreateFleaLocation(
-            LocationNames.Flea__bone_east_10_church,
+            LocationNames.Flea__Pilgrim_s_Rest,
             SceneNames.Bone_East_10_Church,
             "Black Thread States Thread Only Variant/Black Thread World/Flea Rescue BlackSilk",
             FleaContainerType.BlackSilk,
             replaceable: false
         ),
         FalseLocation = CreateFleaLocation(
-            LocationNames.Flea__bone_east_10_church,
+            LocationNames.Flea__Pilgrim_s_Rest,
             SceneNames.Bone_East_10_Church,
             "Black Thread States Thread Only Variant/Normal World/Flea Rescue Sleeping",
             FleaContainerType.Sleeping,
@@ -144,7 +144,7 @@ internal static partial class BaseLocationList
     };
 
     public static Location Flea__shadow_28 => CreateFleaLocation(
-        LocationNames.Flea__shadow_28,
+        LocationNames.Flea__Bilewater_Lower,
         SceneNames.Shadow_28,
         "Rosary Thief Control/Flea Rescue Scene/Flea Rescue Scared",
         FleaContainerType.Scared,
@@ -152,7 +152,7 @@ internal static partial class BaseLocationList
         );
 
     public static Location Flea__ant_03 => CreateFleaLocation(
-        LocationNames.Flea__ant_03,
+        LocationNames.Flea__Hunter_s_March,
         SceneNames.Ant_03,
         "Flea Rescue Cage",
         FleaContainerType.AntCage,
@@ -160,16 +160,18 @@ internal static partial class BaseLocationList
         );
 
     public static Location Flea__slab_cell => CreateFleaLocation(
-        LocationNames.Flea__slab_cell,
+        LocationNames.Flea__Slab_Cell,
         SceneNames.Slab_Cell,
         "Flea Slab Cage",
         FleaContainerType.SlabCage,
         replaceable: false
-        );
+    ).WithTag(new RemoveComponentTag<DeactivateIfPlayerdataTrue>() { SceneName = SceneNames.Slab_13, ObjectName = "Audio Player Flea Distressed" })
+     .WithTag(new DeactivateIfPlacementCheckedTag() { SceneName = SceneNames.Slab_13, ObjectName = "Audio Player Flea Distressed" })
+    /* .WithTag(new DeactivateIfContainerReplacedTag() { SceneName = SceneNames.Slab_13, ObjectName = "Audio Player Flea Distressed" } ) */;
     // TODO - add tag for audio
 
     public static Location Flea__dust_09 => CreateFleaLocation(
-        LocationNames.Flea__dust_09,
+        LocationNames.Flea__Exhaust_Organ,
         SceneNames.Dust_09,
         "Flea Rescue Branches",
         FleaContainerType.Branches,
@@ -177,7 +179,7 @@ internal static partial class BaseLocationList
         );
 
     public static Location Flea__library_01 => CreateFleaLocation(
-        LocationNames.Flea__library_01,
+        LocationNames.Flea__Whispering_Vaults,
         SceneNames.Library_01,
         "Flea Rescue CitadelCage",
         FleaContainerType.CitadelCage,
@@ -185,7 +187,7 @@ internal static partial class BaseLocationList
         );
 
     public static Location Flea__greymoor_15b => CreateFleaLocation(
-        LocationNames.Flea__greymoor_15b,
+        LocationNames.Flea__Greymoor_Craws,
         SceneNames.Greymoor_15b,
         "Flea Rescue Barrel",
         FleaContainerType.Barrel,
@@ -193,7 +195,7 @@ internal static partial class BaseLocationList
         );
 
     public static Location Flea__dock_03d => CreateFleaLocation(
-        LocationNames.Flea__dock_03d,
+        LocationNames.Flea__Docks_East,
         SceneNames.Dock_03d,
         "Flea Rescue Sleeping",
         FleaContainerType.Sleeping,
@@ -201,7 +203,7 @@ internal static partial class BaseLocationList
         );
 
     public static Location Flea__under_21 => CreateFleaLocation(
-        LocationNames.Flea__under_21,
+        LocationNames.Flea__Underworks_Lava,
         SceneNames.Under_21,
         "Flea Rescue Barrel",
         FleaContainerType.Barrel,
@@ -209,7 +211,7 @@ internal static partial class BaseLocationList
         );
 
     public static Location Flea__shadow_10 => CreateFleaLocation(
-        LocationNames.Flea__shadow_10,
+        LocationNames.Flea__Bilewater_Upper,
         SceneNames.Shadow_10,
         "Flea Rescue Branches",
         FleaContainerType.Branches,
@@ -217,7 +219,7 @@ internal static partial class BaseLocationList
         );
 
     public static Location Flea__coral_35 => CreateFleaLocation(
-        LocationNames.Flea__coral_35,
+        LocationNames.Flea__Blasted_Steps_Upper,
         SceneNames.Coral_35,
         "Flea Rescue Sleeping",
         FleaContainerType.Sleeping,
@@ -225,7 +227,7 @@ internal static partial class BaseLocationList
         );
 
     public static Location Flea__coral_24 => CreateFleaLocation(
-        LocationNames.Flea__coral_24,
+        LocationNames.Flea__Sands_of_Karak,
         SceneNames.Coral_24,
         "Flea Rescue Generic",
         FleaContainerType.GenericWall,
@@ -233,7 +235,7 @@ internal static partial class BaseLocationList
         );
 
     public static Location Flea__song_14 => CreateFleaLocation(
-        LocationNames.Flea__song_14,
+        LocationNames.Flea__Songclave_West,
         SceneNames.Song_14,
         "Flea Rescue CitadelCage",
         FleaContainerType.CitadelCage,
@@ -241,7 +243,7 @@ internal static partial class BaseLocationList
         );
 
     public static Location Flea__under_23 => CreateFleaLocation(
-        LocationNames.Flea__under_23,
+        LocationNames.Flea__Underworks_Wisp,
         SceneNames.Under_23,
         "Flea Rescue Barrel",
         FleaContainerType.Barrel,
@@ -249,7 +251,7 @@ internal static partial class BaseLocationList
         );
 
     public static Location Flea__library_09 => CreateFleaLocation(
-        LocationNames.Flea__library_09,
+        LocationNames.Flea__Songclave_East,
         SceneNames.Library_09,
         "Flea Rescue Sleeping",
         FleaContainerType.Sleeping,
@@ -257,7 +259,7 @@ internal static partial class BaseLocationList
         );
 
     public static Location Flea__bone_east_17b => CreateFleaLocation(
-        LocationNames.Flea__bone_east_17b,
+        LocationNames.Flea__Far_Fields_West,
         SceneNames.Bone_East_17b,
         "Flea Scene/Flea Rescue Cage",
         FleaContainerType.AntCage,
@@ -265,7 +267,7 @@ internal static partial class BaseLocationList
         );
 
     public static Location Flea__bone_06 => CreateFleaLocation(
-        LocationNames.Flea__bone_06,
+        LocationNames.Flea__Marrow_Upper,
         SceneNames.Bone_06,
         "Flea Rescue Branches",
         FleaContainerType.Branches,
@@ -273,7 +275,7 @@ internal static partial class BaseLocationList
         );
 
     public static Location Flea__shellwood_03 => CreateFleaLocation(
-        LocationNames.Flea__shellwood_03,
+        LocationNames.Flea__Shellwood_Central,
         SceneNames.Shellwood_03,
         "Flea Rescue Branches",
         FleaContainerType.Branches,
@@ -281,7 +283,7 @@ internal static partial class BaseLocationList
         );
 
     public static Location Flea__slab_06 => CreateFleaLocation(
-        LocationNames.Flea__slab_06,
+        LocationNames.Flea__Slab_Bellway,
         SceneNames.Slab_06,
         "Flea Rescue Sleeping",
         FleaContainerType.Sleeping,
@@ -289,7 +291,7 @@ internal static partial class BaseLocationList
         );
 
     public static Location Flea__peak_05c => CreateFleaLocation(
-        LocationNames.Flea__peak_05c,
+        LocationNames.Flea__Mount_Fay,
         SceneNames.Peak_05c,
         "Snowflake Chunk - Flea",
         FleaContainerType.Ice,
