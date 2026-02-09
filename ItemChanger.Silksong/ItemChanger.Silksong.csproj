@@ -79,7 +79,7 @@
     <PackageReference Include="Silksong.Benchwarp" Version="1.1.0" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
     <Reference Include="MMHOOK_Assembly-CSharp">
       <HintPath>$(SilksongFolder)/BepInEx/plugins/MMHOOK/Managed/MMHOOK_Assembly-CSharp.dll</HintPath>
     </Reference>

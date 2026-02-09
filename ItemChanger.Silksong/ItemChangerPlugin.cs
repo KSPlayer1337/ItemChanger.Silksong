@@ -55,6 +55,7 @@ namespace ItemChanger.Silksong
         }
         
         // The following is unused reference code for how to create a profile on new game 
+        /*
         private void StartItemChangerProfile(On.UIManager.orig_StartNewGame orig, UIManager self, bool permaDeath, bool bossRush)
         {
             Logger.LogInfo("Creating IC profile...");
@@ -69,5 +70,6 @@ namespace ItemChanger.Silksong
             }
             orig(self, permaDeath, bossRush);
         }
+        */
     }
 }
