@@ -14,36 +14,42 @@ namespace ItemChanger.Silksong.RawData
         {
             Name = ItemNames.Cross_Stitch,
             CollectableName = "Parry",
+            BoolName = nameof(PlayerData.hasParry),
             UIDef = new CollectableUIDef { CollectableName = "Parry" },
         };
         public static Item Pale_Nails => new ItemChangerToolItemSkill
         {
             Name = ItemNames.Pale_Nails,
             CollectableName = "Silk Boss Needle",
+            BoolName = nameof(PlayerData.hasSilkBossNeedle),
             UIDef = new CollectableUIDef { CollectableName = "Silk Boss Needle" },
         };
         public static Item Rune_Rage => new ItemChangerToolItemSkill
         {
             Name = ItemNames.Rune_Rage,
             CollectableName = "Silk Bomb",
+            BoolName = nameof(PlayerData.hasSilkBomb),
             UIDef = new CollectableUIDef { CollectableName = "Silk Bomb" },
         };
         public static Item Sharpdart => new ItemChangerToolItemSkill
         {
             Name = ItemNames.Sharpdart,
             CollectableName = "Silk Charge",
+            BoolName = nameof(PlayerData.hasSilkCharge),
             UIDef = new CollectableUIDef { CollectableName = "Silk Charge" },
         };
         public static Item Silkspear => new ItemChangerToolItemSkill
         {
             Name = ItemNames.Silkspear,
             CollectableName = "Silk Spear",
+            BoolName = nameof(PlayerData.hasNeedleThrow),
             UIDef = new CollectableUIDef { CollectableName = "Silk Spear" },
         };
         public static Item Thread_Storm => new ItemChangerToolItemSkill
         {
             Name = ItemNames.Thread_Storm,
             CollectableName = "Thread Sphere",
+            BoolName = nameof(PlayerData.hasThreadSphere),
             UIDef = new CollectableUIDef { CollectableName = "Thread Sphere" },
         };
 

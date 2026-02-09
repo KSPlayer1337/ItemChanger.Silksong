@@ -176,7 +176,7 @@ public static class TestDispatcher
                     Name = "Everbloom",
                     SceneName = SceneNames.Tut_02,
                     X = 133.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Everbloom)!));
@@ -189,7 +189,7 @@ public static class TestDispatcher
                     Name = "Base Hunter Crest (middle)",
                     SceneName = SceneNames.Tut_02,
                     X = 133.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Crest_of_Hunter)!));
@@ -198,25 +198,25 @@ public static class TestDispatcher
                     Name = "Hunter Crest v2 (left)",
                     SceneName = SceneNames.Tut_02,
                     X = 130.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
-                }.Wrap().Add(finder.GetItem(ItemNames.Crest_of_Hunter_v2)!));
+                }.Wrap().Add(finder.GetItem(ItemNames.Crest_of_Hunter__Upgrade_1)!));
                 prof.AddPlacement(new CoordinateLocation
                 {
                     Name = "Hunter Crest v3 (right)",
                     SceneName = SceneNames.Tut_02,
                     X = 136.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
-                }.Wrap().Add(finder.GetItem(ItemNames.Crest_of_Hunter_v3)!));
+                }.Wrap().Add(finder.GetItem(ItemNames.Crest_of_Hunter__Upgrade_2)!));
                 prof.AddPlacement(new CoordinateLocation
                 {
                     Name = "Wanderer Crest (far right)",
                     SceneName = SceneNames.Tut_02,
                     X = 143.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Crest_of_Wanderer)!));
@@ -229,7 +229,7 @@ public static class TestDispatcher
                     Name = "Wanderer Crest",
                     SceneName = SceneNames.Tut_02,
                     X = 133.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Crest_of_Wanderer)!));
@@ -242,10 +242,10 @@ public static class TestDispatcher
                     Name = "Cloakless",
                     SceneName = SceneNames.Tut_02,
                     X = 133.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
-                }.Wrap().Add(finder.GetItem(ItemNames.Cloakless)!));
+                }.Wrap().Add(finder.GetItem(ItemNames.Crest_of_Cloakless)!));
                 break;
 
             case Tests.Cross_Stitch_from_spawned_shiny:
@@ -255,7 +255,7 @@ public static class TestDispatcher
                     Name = "Cross Stitch",
                     SceneName = SceneNames.Tut_02,
                     X = 133.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Cross_Stitch)!));
@@ -268,7 +268,7 @@ public static class TestDispatcher
                     Name = "Delver's Drill (left)",
                     SceneName = SceneNames.Tut_02,
                     X = 130.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Delver_s_Drill)!));
@@ -277,7 +277,7 @@ public static class TestDispatcher
                     Name = "Multibinder (middle)",
                     SceneName = SceneNames.Tut_02,
                     X = 133.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Multibinder)!));
@@ -287,7 +287,7 @@ public static class TestDispatcher
                     Name = "Compass (right)",
                     SceneName = SceneNames.Tut_02,
                     X = 136.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Compass)!));
@@ -300,7 +300,7 @@ public static class TestDispatcher
                     Name = "Curveclaw (left)",
                     SceneName = SceneNames.Tut_02,
                     X = 133.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Curveclaw)!));
@@ -309,7 +309,7 @@ public static class TestDispatcher
                     Name = "Curvesickle (right)",
                     SceneName = SceneNames.Tut_02,
                     X = 136.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Curvesickle)!));
@@ -322,7 +322,7 @@ public static class TestDispatcher
                     Name = "Arcane Egg",
                     SceneName = SceneNames.Tut_02,
                     X = 133.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Arcane_Egg)!));
@@ -335,7 +335,7 @@ public static class TestDispatcher
                     Name = "Vaultkeeper's Melody",
                     SceneName = SceneNames.Tut_02,
                     X = 133.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Vaultkeeper_s_Melody)!));
@@ -348,7 +348,7 @@ public static class TestDispatcher
                     Name = "Pale Oil",
                     SceneName = SceneNames.Tut_02,
                     X = 133.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Pale_Oil)!));
@@ -361,7 +361,7 @@ public static class TestDispatcher
                     Name = "Tool Pouch (left)",
                     SceneName = SceneNames.Tut_02,
                     X = 133.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Tool_Pouch)!));
@@ -370,7 +370,7 @@ public static class TestDispatcher
                     Name = "Crafting Kit (right)",
                     SceneName = SceneNames.Tut_02,
                     X = 136.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Crafting_Kit)!));
@@ -383,7 +383,7 @@ public static class TestDispatcher
                     Name = "White Quill (left)",
                     SceneName = SceneNames.Tut_02,
                     X = 130.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Quill__White)!));
@@ -392,7 +392,7 @@ public static class TestDispatcher
                     Name = "Red Quill (middle)",
                     SceneName = SceneNames.Tut_02,
                     X = 133.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Quill__Red)!));
@@ -401,7 +401,7 @@ public static class TestDispatcher
                     Name = "Purple Quill (right)",
                     SceneName = SceneNames.Tut_02,
                     X = 136.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Quill__Purple)!));
@@ -414,7 +414,7 @@ public static class TestDispatcher
                     Name = "Hornet Statuette",
                     SceneName = SceneNames.Tut_02,
                     X = 133.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Hornet_Statuette)!));
@@ -427,7 +427,7 @@ public static class TestDispatcher
                     Name = "Hunter's Memento",
                     SceneName = SceneNames.Tut_02,
                     X = 133.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Hunter_s_Memento)!));
@@ -440,7 +440,7 @@ public static class TestDispatcher
                     Name = "Farsight",
                     SceneName = SceneNames.Tut_02,
                     X = 133.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Farsight)!));
@@ -453,7 +453,7 @@ public static class TestDispatcher
                     Name = "Twisted Bud",
                     SceneName = SceneNames.Tut_02,
                     X = 133.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Twisted_Bud)!));
@@ -466,7 +466,7 @@ public static class TestDispatcher
                     Name = "Flintgem (left)",
                     SceneName = SceneNames.Tut_02,
                     X = 130.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Flintgem)!));
@@ -475,7 +475,7 @@ public static class TestDispatcher
                     Name = "Flintgem (middle)",
                     SceneName = SceneNames.Tut_02,
                     X = 133.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Flintgem)!));
@@ -484,7 +484,7 @@ public static class TestDispatcher
                     Name = "Flintgem (right)",
                     SceneName = SceneNames.Tut_02,
                     X = 136.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Flintgem)!));
@@ -497,7 +497,7 @@ public static class TestDispatcher
                     Name = "Courier's Swag (left)",
                     SceneName = SceneNames.Tut_02,
                     X = 130.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Courier_s_Swag)!));
@@ -506,7 +506,7 @@ public static class TestDispatcher
                     Name = "Courier's Rasher (middle)",
                     SceneName = SceneNames.Tut_02,
                     X = 133.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Courier_s_Rasher)!));
@@ -515,7 +515,7 @@ public static class TestDispatcher
                     Name = "Queen's Egg (right)",
                     SceneName = SceneNames.Tut_02,
                     X = 136.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Queen_s_Egg)!));
@@ -524,7 +524,7 @@ public static class TestDispatcher
                     Name = "Liquid Lacquer (far right)",
                     SceneName = SceneNames.Tut_02,
                     X = 139.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Liquid_Lacquer)!));
@@ -537,7 +537,7 @@ public static class TestDispatcher
                     Name = "Plasmium",
                     SceneName = SceneNames.Tut_02,
                     X = 133.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Plasmium)!));
