@@ -6,9 +6,11 @@ using ItemChanger.Placements;
 using ItemChanger.Serialization;
 using ItemChanger.Silksong.Modules;
 using ItemChanger.Silksong.RawData;
+using ItemChanger.Silksong.Serialization;
 using ItemChanger.Silksong.StartDefs;
 using ItemChanger.Silksong.UIDefs;
 using System.ComponentModel;
+using UnityEngine;
 
 namespace ItemChangerTesting;
 
@@ -77,6 +79,9 @@ public enum Tests
     FleaAtFlea,
     [Description("Tests modifying the Pale_Oil-Whispering_Vaults shiny in-place")]
     Surgeon_s_Key_at_Whispering_Vaults,
+
+    [Description("Tests atlas sprites")]
+    AtlasSpriteItems,
 }
 
 public static class TestDispatcher
@@ -548,18 +553,38 @@ public static class TestDispatcher
                 prof.AddPlacement(finder.GetLocation(LocationNames.Pale_Oil__Whispering_Vaults)!
                     .Wrap().Add(finder.GetItem(ItemNames.Surgeon_s_Key)!));
                 break;
+
+            case Tests.AtlasSpriteItems:
+                StartNear(SceneNames.Tut_02, PrimitiveGateNames.right1);
+                prof.AddPlacement(new CoordinateLocation
+                {
+                    Name = "Plasmium",
+                    SceneName = SceneNames.Tut_02,
+                    X = 133.6f,
+                    Y = 31.57f,
+                    FlingType = ItemChanger.Enums.FlingType.Everywhere,
+                    Managed = false,
+                    ForceDefaultContainer = true,  // Multi shiny because chests aren't implemented
+                }.Wrap()
+                 .WithDebugItem(sprite: new AtlasSprite() { BundleName = "atlases_assets_assets/sprites/_atlases/hornet_map.spriteatlas", SpriteName = "pin_tube_station" }, text: "Ventrica")
+                 .WithDebugItem(sprite: new AtlasSprite() { BundleName = "atlases_assets_assets/sprites/_atlases/inventory.spriteatlas", SpriteName = "I_crimson_cloak_down" }, text: "DJ without glide")
+                 .WithDebugItem(sprite: new AtlasSprite() { BundleName = "atlases_assets_assets/sprites/_atlases/inventory.spriteatlas", SpriteName = "S_thread_dash" }, text: "Sharpdart?")
+                 .WithDebugItem(sprite: new AtlasSprite() { BundleName = "atlases_assets_assets/sprites/_atlases/inventory.spriteatlas", SpriteName = "Inv_0029_spell_core_outer_icons_0000_1_wall_jump" }, text: "claw")
+                 );
+                break;
+
         }
         Run();
     }
 
-    private static Placement WithDebugItem(this Placement self)
+    private static Placement WithDebugItem(this Placement self, IValueProvider<Sprite>? sprite = null, string? text = null)
         => self.Add(new DebugItem()
         {
             Name = $"Debug Item @ {self.Name}",
             UIDef = new MsgUIDef()
             {
-                Name = new BoxedString($"Checked {self.Name}"),
-                Sprite = new EmptySprite(),
+                Name = new BoxedString(text ?? $"Checked {self.Name}"),
+                Sprite = sprite ?? new EmptySprite(),
             }
         });
 }
