@@ -5,6 +5,12 @@ namespace ItemChanger.Silksong;
 
 public static class SilksongEvents
 {
+    public const string Wildcard = "*";
+
+    /// Registers a delegate to run whenever a FSM matching the given
+    /// (scene name, object name, FSM name) tuple is loaded.
+    /// The scene and object names can be Wildcard ("*") instead to match any scene or any
+    /// object, respectively.
     public static void AddFsmEdit(FsmId id, Action<PlayMakerFSM> edit)
     {
         edits[id] = edits.GetValueOrDefault(id) + edit;
@@ -41,10 +47,21 @@ public static class SilksongEvents
         private static void Prefix(PlayMakerFSM __instance)
         {
             var fsm = __instance;
-            FsmId id = new(fsm.gameObject.scene.name, fsm.gameObject.name, fsm.FsmName);
+            var sceneName = fsm.gameObject.scene.name;
+            var objectName = fsm.gameObject.name;
+            var fsmName = fsm.FsmName;
+            List<FsmId> matchingIds = [
+                new(sceneName, objectName, fsmName),
+                new(Wildcard, objectName, fsmName),
+                new(sceneName, Wildcard, fsmName),
+                new(Wildcard, Wildcard, fsmName)
+            ];
             try
             {
-                edits.GetValueOrDefault(id)?.Invoke(fsm);
+                foreach (const id in matchingIds)
+                {
+                    edits.GetValueOrDefault(id)?.Invoke(fsm);
+                }
             }
             catch (Exception err)
             {
