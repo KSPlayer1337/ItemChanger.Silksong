@@ -1,5 +1,6 @@
 using BepInEx;
 using ItemChanger.Silksong.Containers;
+using ItemChanger.Silksong.Serialization;
 
 namespace ItemChanger.Silksong
 {
@@ -37,6 +38,7 @@ namespace ItemChanger.Silksong
             try
             {
                 DefineContainers();
+                AtlasSpriteBundleRegistry.Hook(ItemChangerHost.Singleton);
             }
             catch (Exception e)
             {
