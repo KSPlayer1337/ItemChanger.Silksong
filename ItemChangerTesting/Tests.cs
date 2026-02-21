@@ -97,10 +97,14 @@ public static class TestDispatcher
 
     private static void StartNear(string scene, string gate)
     {
-        ItemChangerHost.Singleton.ActiveProfile!.Modules.Remove<StartDefModule>();
-        ItemChangerHost.Singleton.ActiveProfile!.Modules.Add(new StartDefModule
+        var modules = ItemChangerHost.Singleton.ActiveProfile!.Modules;
+        if (modules.Get<StartDefModule>() is {} m)
         {
-            StartDef = new TransitionOffsetStartDef { SceneName = scene, GateName = gate, }
+            modules.Remove(m);
+        }
+        modules.Add(new StartDefModule
+        {
+            StartDef = new TransitionOffsetStartDef { SceneName = scene, GateName = gate, },
         });
     }
 
