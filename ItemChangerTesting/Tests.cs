@@ -2,6 +2,7 @@ using Benchwarp.Data;
 using ItemChanger;
 using ItemChanger.Items;
 using ItemChanger.Locations;
+using ItemChanger.Modules;
 using ItemChanger.Placements;
 using ItemChanger.Serialization;
 using ItemChanger.Silksong.Modules;
@@ -97,8 +98,8 @@ public static class TestDispatcher
 
     private static void StartNear(string scene, string gate)
     {
-        var modules = ItemChangerHost.Singleton.ActiveProfile!.Modules;
-        if (modules.Get<StartDefModule>() is {} m)
+        ModuleCollection modules = ItemChangerHost.Singleton.ActiveProfile!.Modules;
+        if (modules.Get<StartDefModule>() is { } m)
         {
             modules.Remove(m);
         }

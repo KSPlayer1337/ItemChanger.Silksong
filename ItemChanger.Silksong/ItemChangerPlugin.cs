@@ -59,15 +59,15 @@ namespace ItemChanger.Silksong
             ItemChangerHost.Singleton.ContainerRegistry.DefineContainer(new FleaContainer());
         }
         
-        public bool HasSaveData => Host.ActiveProfile != null;
+        bool IRawSaveDataMod.HasSaveData => Host.ActiveProfile != null;
 
-        public void WriteSaveData(Stream saveFile)
+        void IRawSaveDataMod.WriteSaveData(Stream saveFile)
         {
             // WriteSaveData is never called if Host.ActiveProfile is null.
             SerializationHelper.Serialize(saveFile, Host.ActiveProfile!);
         }
 
-        public void ReadSaveData(Stream? saveFile)
+        void IRawSaveDataMod.ReadSaveData(Stream? saveFile)
         {
             // Can't just overwrite Host.ActiveProfile, because the profile needs to be manually
             // Disposed. This applies both when returning to the main menu, and also when using
@@ -75,12 +75,10 @@ namespace ItemChanger.Silksong
             if (Host.ActiveProfile != null)
             {
                 Host.ActiveProfile.Dispose();
-                Host.ActiveProfile = null;
             }
             if (saveFile != null)
             {
-                var profile = ItemChangerProfile.FromStream(Host, saveFile);
-                profile.Load();
+                ItemChangerProfile profile = ItemChangerProfile.FromStream(Host, saveFile);
             }
         }
     }
