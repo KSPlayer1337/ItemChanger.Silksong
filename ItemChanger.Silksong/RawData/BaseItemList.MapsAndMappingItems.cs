@@ -17,18 +17,11 @@ internal static partial class BaseItemList
      * when testing the quills appear with the name !!/!! and do not appear in the inventory; most likely requires changing the hasQuill bool in PlayerData to support
      */
     //TODO: implement ItemChanger item class that can change QuillState int value in PlayerData
-    public static Item Quill__White => ItemChangerSavedItem.Create(//extend class to support QuillState int value (QuillState = 1)
-        name: ItemNames.Quill__White,
-        id: "Quill",
-        type: BaseGameSavedItem.ItemType.CollectableItem);
-    public static Item Quill__Red => ItemChangerSavedItem.Create(//extend class to support QuillState int value (QuillState = 2)
-        name: ItemNames.Quill__Red,
-        id: "Quill",
-        type: BaseGameSavedItem.ItemType.CollectableItem);
-    public static Item Quill__Purple => ItemChangerSavedItem.Create(//extend class to support QuillState int value (QuillState = 3)
-        name: ItemNames.Quill__Purple,
-        id: "Quill",
-        type: BaseGameSavedItem.ItemType.CollectableItem);
+
+    public static Item Quill__White => new QuillItem { Name = ItemNames.Quill__White, QuillState = 1 };
+    public static Item Quill__Red => new QuillItem { Name = ItemNames.Quill__Red, QuillState = 2};
+    public static Item Quill__Purple => new QuillItem { Name = ItemNames.Quill__Purple, QuillState = 3 };
+
 
 
     //TODO: implement ItemChanger class that supports map markers
