@@ -2,19 +2,20 @@ using ItemChanger.Items;
 
 namespace ItemChanger.Silksong.Items
 {
-    public class MarkerItem : Item
+    /// <summary>
+    /// Item which sets the bool to unlock a specific map marker, as well as a generic bool to inform the game that any marker has been unlocked.
+    /// </summary>
+    public class MarkerItem : PDBoolItem
     {
-        public string FieldName { get; set; }
-
         public override void GiveImmediate(GiveInfo info)
         {
-            PlayerData.instance.SetBool(FieldName, true);
-            PlayerData.instance.SetBool("hasAnyPlaceableMarker", true);
+            base.GiveImmediate(info);
+            PlayerData.instance.SetBool(nameof(PlayerData.hasMarker), true);
         }
 
         public override bool Redundant()
         {
-            return PlayerData.instance.GetBool(FieldName);
+            return base.Redundant() && PlayerData.instance.GetBool(nameof(PlayerData.hasMarker));
         }
     }
 }
