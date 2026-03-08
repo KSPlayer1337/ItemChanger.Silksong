@@ -51,10 +51,7 @@ internal static partial class BaseAtlasSprites
     /*
     Bilewater Map notes
     -the sprite for the bilewater map does not count as an AtlasSprite and will not work with the BaseAtlasSprite system
-    -the sprite then requires an implementation for cached sprites based on AssetHelper similar to the FleaSprite implementation
-    -the following are important details needed for the AssetHelper implementation:
-        -bundleName: "dataassets_assets_assets/dataassets/shopitems.bundle"
-        -assetName: "Assets/Data Assets/Shop Items/Mapper Shadow Map.asset"
+    -the sprite is instead loaded by the BilewaterMapSprite class
     */
 
     public static AtlasSprite Blasted_Steps_Map => new()

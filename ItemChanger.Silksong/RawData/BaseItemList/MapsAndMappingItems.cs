@@ -1,6 +1,7 @@
 ﻿using ItemChanger.Items;
 using ItemChanger.Silksong.Items;
 using ItemChanger.Silksong.Serialization;
+using ItemChanger.Silksong.UIDefs;
 
 namespace ItemChanger.Silksong.RawData;
 
@@ -8,7 +9,19 @@ internal static partial class BaseItemList
 {
     // maps
     public static Item Bellhart_Map => new PDBoolItem { Name = ItemNames.Bellhart_Map, BoolName = nameof(PlayerData.HasBellhartMap), UIDef = null! };
-    public static Item Bilewater_Map => new PDBoolItem { Name = ItemNames.Bilewater_Map, BoolName = nameof(PlayerData.HasSwampMap), UIDef = null! };
+    
+    public static Item Bilewater_Map => new PDBoolItem
+    {
+        Name = ItemNames.Bilewater_Map,
+        BoolName = nameof(PlayerData.HasSwampMap),
+        UIDef = new MsgUIDef()
+        {
+            Name = BaseLanguageStrings.Bilewater_Map_Name,
+            ShopDesc = BaseLanguageStrings.Bilewater_Map_Desc,
+            Sprite = new BilewaterMapSprite()
+        }
+    };
+
     public static Item Blasted_Steps_Map => new PDBoolItem { Name = ItemNames.Blasted_Steps_Map, BoolName = nameof(PlayerData.HasJudgeStepsMap), UIDef = null! };
     public static Item Choral_Chambers_Map => new PDBoolItem { Name = ItemNames.Choral_Chambers_Map, BoolName = nameof(PlayerData.HasHallsMap), UIDef = null! };
     public static Item Cogwork_Core_Map => new PDBoolItem { Name = ItemNames.Cogwork_Core_Map, BoolName = nameof(PlayerData.HasCogMap), UIDef = null! };
