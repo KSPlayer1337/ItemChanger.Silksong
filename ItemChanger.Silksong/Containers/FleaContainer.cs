@@ -99,16 +99,6 @@ public class FleaContainer : Container
     // as the flea's chain is longer than many hanging checks.
     // That said the aspid container might be fun to include, and maybe others
     
-    /// <summary>
-    /// Managed asset for the fleas collected item.
-    /// This is loaded while in an itemchanger profile.
-    /// </summary>
-    public static ManagedAsset<QuestTargetPlayerDataBools> FleasSavedItem { get; }
-        = ManagedAsset<QuestTargetPlayerDataBools>.FromNonSceneAsset(
-                assetName: "Assets/Data Assets/Quest System/Proxies/FleasCollected Target.asset",
-                bundleName: "dataassets_assets_assets/dataassets/questsystem/proxies.bundle"
-            );
-
     public override uint SupportedCapabilities => ContainerCapabilities.None;  // TODO - fix this
 
     public override string Name => ContainerNames.Flea;
@@ -277,7 +267,6 @@ public class FleaContainer : Container
         {
             data.Prefab.Load();
         }
-        FleasSavedItem.Load();
     }
     
     protected override void Unload()
@@ -286,6 +275,5 @@ public class FleaContainer : Container
         {
             data.Prefab.Unload();
         }
-        FleasSavedItem.Unload();
     }
 }

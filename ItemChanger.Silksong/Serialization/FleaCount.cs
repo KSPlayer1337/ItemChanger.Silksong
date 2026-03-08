@@ -1,19 +1,14 @@
-﻿using ItemChanger.Serialization;
-using ItemChanger.Silksong.Containers;
+﻿using GlobalSettings;
+using ItemChanger.Serialization;
 using Newtonsoft.Json;
-using Silksong.AssetHelper.ManagedAssets;
 
 namespace ItemChanger.Silksong.Serialization;
 
+/// <summary>
+/// Int provider that returns the fleas collected count as returned by the
+/// <see cref="QuestTargetPlayerDataBools" /> saved item.
+/// </summary>
 public class FleaCount : IValueProvider<int>
 {
-    [JsonIgnore] public int Value
-    {
-        get
-        {
-            ManagedAsset<QuestTargetPlayerDataBools> asset = FleaContainer.FleasSavedItem;
-            asset.EnsureLoaded();
-            return asset.Handle.Result.CompletedCount;
-        }
-    }
+    [JsonIgnore] public int Value => Gameplay.FleasCollectedCount;
 }
