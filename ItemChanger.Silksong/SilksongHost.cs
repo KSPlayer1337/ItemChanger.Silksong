@@ -7,8 +7,10 @@ using ItemChanger.Logging;
 using ItemChanger.Modules;
 using ItemChanger.Silksong.Extensions;
 using ItemChanger.Silksong.Modules;
+using ItemChanger.Silksong.Serialization;
 using ItemChanger.Silksong.StartDefs;
 using ItemChanger.Silksong.Util;
+using TeamCherry.Localization;
 using TeamCherry.SharedUtils;
 
 namespace ItemChanger.Silksong
@@ -77,6 +79,26 @@ namespace ItemChanger.Silksong
         }
 
         private readonly Dictionary<FsmId, Action<PlayMakerFSM>?> fsmEdits = [];
+
+        public void AddLanguageEdit(LanguageString id, Func<string, string> edit)
+        {
+            if (!languageEdits.TryGetValue(id, out List<Func<string, string>> list))
+            {
+                languageEdits.Add(id, list = []);
+            }
+            list.Add(edit);
+        }
+
+        public void RemoveLanguageEdit(LanguageString id, Func<string, string> edit)
+        {
+            if (languageEdits.TryGetValue(id, out List<Func<string, string>> list))
+            {
+                list.Remove(edit);
+                if (list.Count == 0) languageEdits.Remove(id);
+            }
+        }
+
+        private readonly Dictionary<LanguageString, List<Func<string, string>>> languageEdits = [];
 
         protected override void PrepareEvents(LifecycleEvents.Invoker lifecycleInvoker, GameEvents.Invoker gameInvoker)
         {
@@ -209,6 +231,26 @@ namespace ItemChanger.Silksong
                 catch (Exception err)
                 {
                     Instance.Logger.LogError($"Error applying FSM edit to FSM {fsmName} in object {objectName} in scene {sceneName}: {err}");
+                }
+            }
+
+            [HarmonyPatch(typeof(Language), nameof(Language.Get), [typeof(string), typeof(string)])]
+            private static void Postfix(string key, string sheetTitle, ref string __result)
+            {
+                LanguageString id = new(sheetTitle, key);
+                if (Host.languageEdits.TryGetValue(id, out List<Func<string, string>> list))
+                {
+                    foreach (Func<string, string > f in list)
+                    {
+                        try
+                        {
+                            __result = f(__result);
+                        }
+                        catch (Exception e)
+                        {
+                            Host.Logger.LogError($"Error performing language edit on key {key} in sheet {sheetTitle}:\n{e}");
+                        }
+                    }
                 }
             }
         }
