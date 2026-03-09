@@ -2,5 +2,23 @@
   "FMT_PAY_ROSARIES": "{ROSARY_COUNT} {ROSARY_NAME}",
   "FMT_FAST_TRAVEL_PATTERN": "{TRAVEL_TYPE} - {STATION_NAME}",
   "FMT_MATERIUM_ENTRY_NAME": "{0} Entry",
-  "FMT_JOURNAL_ENTRY_NAME": "{0} Entry"
+  "FMT_JOURNAL_ENTRY_NAME": "{0} Entry",
+
+  "INV_NAME_SKILL_HARPOON_LEFT": "Left Clawline",
+  "INV_NAME_SKILL_HARPOON_RIGHT": "Right Clawline",
+  "INV_DESC_SKILL_HARPOON_LEFT": "Advanced Weaver talent. Throw the Silk-strung needle to the left and charge towards it.",
+  "INV_DESC_SKILL_HARPOON_RIGHT": "Advanced Weaver talent. Throw the Silk-strung needle to the right and charge towards it.",
+  "INV_NAME_WALLJUMP_LEFT": "Left Cling Grip",
+  "INV_NAME_WALLJUMP_RIGHT": "Right Cling Grip",
+  "INV_DESC_WALLJUMP_LEFT": "Ancient Weaver technique. Cling to left surfaces and leap off to rapidly scale heights.",
+  "INV_DESC_WALLJUMP_RIGHT": "Ancient Weaver technique. Cling to right surfaces and leap off to rapidly scale heights.",
+  "INV_NAME_SKILL_SPRINT_LEFT": "Left Swift Step",
+  "INV_NAME_SKILL_SPRINT_RIGHT": "Right Swift Step",
+  "INV_DESC_SKILL_SPRINT_LEFT": "Fabled Weaver talent. Dash left and sprint with unnatural speed, as though gliding upon Silk.",
+  "INV_DESC_SKILL_SPRINT_RIGHT": "Fabled Weaver talent. Dash right and sprint with unnatural speed, as though gliding upon Silk.",
+  "INV_NAME_LEFTSLASH": "Leftslash",
+  "INV_NAME_RIGHTSLASH": "Rightslash",
+  "INV_NAME_UPSLASH": "Upslash",
+  "INV_NAME_DOWNSLASH": "Downslash",
+  "INV_DESC_ANYSLASH": "TODO"
 }
