@@ -53,7 +53,7 @@ public class EvaLocation : AutoLocation
         var tabletPrefab = AssetCache.GetAsset<IList<GameObject>>(GameObjectListKeys.LORE_TABLET_WEAVER)
             .First(obj => obj.FindChild(inspectRegionName) != null);
         var tablet = GameObject.Instantiate(tabletPrefab);
-        tablet.transform.position = new Vector3(71.94f, 10.57f, tablet.transform.position.z);
+        tablet.transform.position = new Vector3(70.94f, 10.57f, tablet.transform.position.z);
         var modKey = "EVA_ITEM_DESCRIPTION";
         LocalisedString s = new(Localization.Sheet, modKey);
         var npc = tablet.FindChild(inspectRegionName)!.GetComponent<BasicNPC>();
