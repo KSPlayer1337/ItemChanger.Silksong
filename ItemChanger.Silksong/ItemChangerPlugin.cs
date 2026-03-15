@@ -12,7 +12,7 @@ namespace ItemChanger.Silksong
     [BepInDependency("org.silksong-modding.prepatcher")]
     [BepInDependency("org.silksong-modding.i18n")]
     [BepInDependency("org.silksong-modding.datamanager")]
-    [BepInDependency("io.github.benchwarp")]
+    [BepInDependency("io.github.homothetyhk.benchwarp")]
     [BepInAutoPlugin(id: "io.github.silksong.itemchanger")]
     public partial class ItemChangerPlugin : BaseUnityPlugin, IRawSaveDataMod
     {
