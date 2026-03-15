@@ -3,6 +3,7 @@ using ItemChanger.Serialization;
 using ItemChanger.Silksong.Items;
 using ItemChanger.Silksong.Serialization;
 using ItemChanger.Silksong.UIDefs;
+using ItemChanger.Tags;
 
 namespace ItemChanger.Silksong.RawData;
 
@@ -28,5 +29,11 @@ internal static partial class BaseItemList
     public static Dictionary<string, Item> GetBaseItems()
     {
         return typeof(BaseItemList).GetProperties().Select(p => (Item)p.GetValue(null)).ToDictionary(i => i.Name);
+    }
+
+    private static T WithChainTag<T>(T item, string? predecessor = null, string? successor = null) where T : Item
+    {
+        item.AddTag(new ItemChainTag { Predecessor = predecessor, Successor = successor });
+        return item;
     }
 }

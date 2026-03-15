@@ -1,4 +1,4 @@
-﻿using ItemChanger.Enums;
+using ItemChanger.Enums;
 using ItemChanger.Silksong.Serialization;
 using ItemChanger.Silksong.Util;
 using UnityEngine;
