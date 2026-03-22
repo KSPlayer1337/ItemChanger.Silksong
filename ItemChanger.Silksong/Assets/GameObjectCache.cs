@@ -1,5 +1,5 @@
 ﻿using Benchwarp.Util;
-using ItemChanger.Serialization;
+using ItemChanger.Silksong.Util;
 using Silksong.AssetHelper.ManagedAssets;
 
 namespace ItemChanger.Silksong.Assets;
@@ -28,39 +28,30 @@ internal class GameObjectCache : IObjectCache<GameObject>
     public GameObjectCache()
     {
         // Load scene assets
+        if (!JsonUtils.TryDeserializeEmbeddedResource(
+            "ItemChanger.Silksong.Resources.Assets.scenegameobjects.json",
+            out Dictionary<string, ManagedAssetGroup<GameObject>.SceneAssetInfo>? sceneAssetData))
         {
-            using Stream stream = GetType().Assembly.GetManifestResourceStream("ItemChanger.Silksong.Resources.Assets.scenegameobjects.json");
+            throw new ArgumentException($"Could not find scene game objects resource");
+        }
 
-            Dictionary<string, ManagedAssetGroup<GameObject>.SceneAssetInfo>? data =
-                SerializationHelper.DeserializeResource<Dictionary<string, ManagedAssetGroup<GameObject>.SceneAssetInfo>>(stream);
-
-            if (data == null)
-            {
-                throw new ArgumentException($"Could not find scene game objects resource");
-            }
-
-            foreach ((string key, ManagedAssetGroup<GameObject>.SceneAssetInfo info) in data)
-            {
-                _assets[key] = ManagedAsset<GameObject>.FromSceneAsset(sceneName: info.SceneName, objPath: info.ObjPath);
-            }
+        foreach ((string key, ManagedAssetGroup<GameObject>.SceneAssetInfo info) in sceneAssetData)
+        {
+            _assets[key] = ManagedAsset<GameObject>.FromSceneAsset(sceneName: info.SceneName, objPath: info.ObjPath);
         }
 
         // Load non-scene assets
+        if (!JsonUtils.TryDeserializeEmbeddedResource(
+            "ItemChanger.Silksong.Resources.Assets.nonscenegameobjects.json",
+            out Dictionary<string, ManagedAssetGroup<GameObject>.NonSceneAssetInfo>? nonSceneAssetData))
         {
-            using Stream stream = GetType().Assembly.GetManifestResourceStream("ItemChanger.Silksong.Resources.Assets.nonscenegameobjects.json");
+            throw new ArgumentException($"Could not find non-scene game objects resource");
+        }
 
-            Dictionary<string, ManagedAssetGroup<GameObject>.NonSceneAssetInfo>? data =
-                SerializationHelper.DeserializeResource<Dictionary<string, ManagedAssetGroup<GameObject>.NonSceneAssetInfo>>(stream);
 
-            if (data == null)
-            {
-                throw new ArgumentException($"Could not find non-scene game objects resource");
-            }
-
-            foreach ((string key, ManagedAssetGroup<GameObject>.NonSceneAssetInfo info) in data)
-            {
-                _assets[key] = ManagedAsset<GameObject>.FromNonSceneAsset(assetName: info.AssetName, bundleName: info.BundleName);
-            }
+        foreach ((string key, ManagedAssetGroup<GameObject>.NonSceneAssetInfo info) in nonSceneAssetData)
+        {
+            _assets[key] = ManagedAsset<GameObject>.FromNonSceneAsset(assetName: info.AssetName, bundleName: info.BundleName);
         }
     }
 

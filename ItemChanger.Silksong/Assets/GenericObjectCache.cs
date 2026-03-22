@@ -1,5 +1,4 @@
-﻿using Benchwarp.Util;
-using ItemChanger.Serialization;
+﻿using ItemChanger.Silksong.Util;
 using Silksong.AssetHelper.ManagedAssets;
 
 namespace ItemChanger.Silksong.Assets;
@@ -22,17 +21,14 @@ internal class GenericObjectCache<T> : IObjectCache<T>
     {
         GenericObjectCache<T> cache = new();
 
-        using Stream stream = typeof(GenericObjectCache<>).Assembly.GetManifestResourceStream(resourceName);
-        // Why does this accept a stream :angery:
-        Dictionary<string, ManagedAssetGroup<T>.NonSceneAssetInfo>? data =
-            SerializationHelper.DeserializeResource<Dictionary<string, ManagedAssetGroup<T>.NonSceneAssetInfo>>(stream);
-
-        if (data == null)
+        if (!JsonUtils.TryDeserializeEmbeddedResource(
+            resourceName,
+            out Dictionary<string, ManagedAssetGroup<T>.NonSceneAssetInfo>? nonSceneAssetData))
         {
             throw new ArgumentException($"Could not find embedded resource {resourceName}");
         }
 
-        foreach ((string key, ManagedAssetGroup<T>.NonSceneAssetInfo info) in data)
+        foreach ((string key, ManagedAssetGroup<T>.NonSceneAssetInfo info) in nonSceneAssetData)
         {
             cache._assets[key] = ManagedAsset<T>.FromNonSceneAsset(assetName: info.AssetName, bundleName: info.BundleName);
         }
