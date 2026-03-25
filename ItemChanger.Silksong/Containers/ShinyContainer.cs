@@ -16,14 +16,26 @@ public class ShinyContainer : Container
 {
     public enum ShinyType
     {
+        /// <summary>
+        /// Regular shinies which require an interact animation to pick up.
+        /// </summary>
         Normal,
+        /// <summary>
+        /// Shinies which are obtained on contact.
+        /// </summary>
         Instant,
     }
 
     [Flags]
     public enum ShinyControlFlags
     {
+        /// <summary>
+        /// The feather effect as applied to Crawbug feather shinies.
+        /// </summary>
         AddFeatherEffect = 1 << 0,
+        /// <summary>
+        /// Removes BreakOnHazard component, allowing shiny to remain active after touching a hazard.
+        /// </summary>
         AllowHazardFloat = 1 << 1,
 
         Default = 0,
@@ -31,11 +43,34 @@ public class ShinyContainer : Container
 
     public enum ShinyFling
     {
+        /// <summary>
+        /// The shiny's fling is not modified. Existing shinies will keep their existing fling.
+        /// New shinies have no fling, but fall under the gravity of their rigidbodies (essentially equivalent to Drop).
+        /// </summary>
+        KeepExisting,
+        /// <summary>
+        /// Flings shiny with speed 0, leaving it to fall under its rigidbody's gravity.
+        /// </summary>
         Drop,
+        /// <summary>
+        /// Flings shiny left or right with equal probability.
+        /// </summary>
         Random,
+        /// <summary>
+        /// Flings shiny at speed 22f and angle 100f.
+        /// </summary>
         Left,
+        /// <summary>
+        /// Flings shiny at speed 22f and angle 80f.
+        /// </summary>
         Right,
+        /// <summary>
+        /// Flings shiny left or right depending on hero position.
+        /// </summary>
         AwayFromHero,
+        /// <summary>
+        /// Does not fling shiny, sets rigidbody as kinematic so that shiny does not fall under gravity.
+        /// </summary>
         FloatInPlace,
     }
 
@@ -44,7 +79,7 @@ public class ShinyContainer : Container
         public static ShinyControlInfo Default { get; } = new();
         public ShinyType ShinyType { get; init; } = ShinyType.Normal;
         public ShinyControlFlags ShinyControlFlags { get; init; } = ShinyControlFlags.Default;
-        public ShinyFling ShinyFling { get; init; } = ShinyFling.Drop;
+        public ShinyFling ShinyFling { get; init; } = ShinyFling.KeepExisting;
     }
 
     /// <summary>
@@ -114,7 +149,11 @@ public class ShinyContainer : Container
         ShinyFling fling = shinyInfo.ShinyFling;
         Rigidbody2D rb = shiny.gameObject.GetOrAddComponent<Rigidbody2D>();
 
-        if (fling == ShinyFling.FloatInPlace)
+        if (fling == ShinyFling.KeepExisting)
+        {
+            // no-op
+        }
+        else if (fling == ShinyFling.FloatInPlace)
         {
             shiny.fling = false;
             rb.bodyType = RigidbodyType2D.Kinematic;

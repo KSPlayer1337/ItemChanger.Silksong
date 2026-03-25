@@ -53,5 +53,41 @@ internal class ShinyFlingTest : Test
                 ShinyType = ShinyContainer.ShinyType.Instant,
             }
         }));
+        Profile.AddPlacement(new CoordinateLocation
+        {
+            Name = "New Instant Keep Existing",
+            SceneName = SceneNames.Tut_02,
+            X = 127.6f,
+            Y = 51.57f,
+            FlingType = ItemChanger.Enums.FlingType.Everywhere,
+            Managed = false,
+        }.Wrap().WithDebugItem()
+        .WithTag(new ShinyControlTag
+        {
+            Info = new ShinyContainer.ShinyControlInfo
+            {
+                ShinyFling = ShinyContainer.ShinyFling.KeepExisting,
+                ShinyType = ShinyContainer.ShinyType.Instant,
+            }
+        }));
+        Profile.AddPlacement(new CoordinateLocation
+        {
+            Name = "New Normal Keep Existing",
+            SceneName = SceneNames.Tut_02,
+            X = 125.6f,
+            Y = 32f,
+            FlingType = ItemChanger.Enums.FlingType.Everywhere,
+            Managed = false,
+        }.Wrap().WithDebugItem()
+        .WithTag(new ShinyControlTag
+        {
+            Info = new ShinyContainer.ShinyControlInfo
+            {
+                ShinyFling = ShinyContainer.ShinyFling.KeepExisting,
+                ShinyType = ShinyContainer.ShinyType.Normal,
+            }
+        }));
+
+
     }
 }
