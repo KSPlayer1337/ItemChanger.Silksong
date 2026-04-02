@@ -1,3 +1,4 @@
+using ItemChanger.Enums;
 using ItemChanger.Items;
 using ItemChanger.Locations;
 using ItemChanger.Placements;
@@ -43,7 +44,7 @@ public class EvaLocation : AutoLocation
 
     private void SpawnTablet(Scene scene)
     {
-        GameObject tablet = LoreTabletContainer.InstantiateWeaverTablet(scene, BuildDescription);
+        GameObject tablet = LoreTabletContainer.InstantiateWeaverTablet(scene, BuildAndSetPreview);
         tablet.name = "IC Eva Item List Tablet";
         tablet.transform.position = new Vector3(70.94f, 11.47f, tablet.transform.position.z);
         tablet.SetActive(true);
@@ -140,17 +141,19 @@ public class EvaLocation : AutoLocation
         Placement!.GiveSome(givenItems, GetGiveInfo());
     }
 
-    private string BuildDescription()
+    private string BuildAndSetPreview()
     {
-        StringBuilder sb = new();
-        foreach (Item item in Placement!.Items)
+        MultiPreviewRecordTag previewTag = Placement!.GetOrAddTag<MultiPreviewRecordTag>();
+        bool placementHidesCostPreview = Placement!.HasTag<DisableCostPreviewTag>();
+        string[] previewLines = Placement!.Items.Select(item =>
         {
+            StringBuilder sb = new();
             sb.Append(item.GetPreviewName(Placement));
             sb.Append(" - ");
             if (item.IsObtained())
             {
-                sb.Append("OBTAINED".GetLanguageString() + "<br>");
-                continue;
+                sb.Append("OBTAINED".GetLanguageString());
+                return sb.ToString();
             }
             CostTag? c = item.GetTag<CostTag>();
             if (c == null || c.Cost.IsFree)
@@ -161,12 +164,18 @@ public class EvaLocation : AutoLocation
             {
                 sb.Append("PAID".GetLanguageString());
             }
+            else if (placementHidesCostPreview || item.HasTag<DisableCostPreviewTag>())
+            {
+                sb.Append("???");
+            }
             else
             {
                 sb.Append(c.Cost.GetCostText());
             }
-            sb.Append("<br>");
-        }
-        return sb.ToString();
+            return sb.ToString();
+        }).ToArray();
+        previewTag.PreviewTexts = previewLines;
+        Placement!.AddVisitFlag(VisitState.Previewed);
+        return string.Join("<br>", previewLines);
     }
 }
