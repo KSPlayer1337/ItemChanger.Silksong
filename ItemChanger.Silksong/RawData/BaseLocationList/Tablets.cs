@@ -9,8 +9,7 @@ namespace ItemChanger.Silksong.RawData;
 // TODO - think about how/whether the soul particles should appear for needolin tabs
 // TODO - optionally enable transfer of relevant tablets to act 3
 // TODO - measure elevation of tablets where possible, and add the appropriate DestroyOnContainerReplace tags
-// TODO - tie the inspect plink (flashing that appears when the knight is not close)
-// to the tablet check?
+// TODO - custom handling of lib-13b checks? (with plinks at "Desk Inspect and Quill/Group/desk_inspect/inspect plink")
 
 internal static partial class BaseLocationList
 {
@@ -75,7 +74,9 @@ internal static partial class BaseLocationList
         ObjectName = "Inspect Region",
         Correction = default,
         Tags = [
-            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+            new DisableObjectOnCheckTag() { ObjectPath = "inspect plink" },
+            new DisableObjectOnCheckTag() { ObjectPath = "inspect plink (1)" },
             ]
     };
 
@@ -86,7 +87,8 @@ internal static partial class BaseLocationList
         ObjectName = "Inspect Region",
         Correction = default,
         Tags = [
-            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+            new DisableObjectOnCheckTag() { ObjectPath = "inspect plink" },
             ]
     };
 
@@ -97,7 +99,8 @@ internal static partial class BaseLocationList
         ObjectName = "Black Thread States Thread Only Variant/Normal World/Inspect Region",
         Correction = default,
         Tags = [
-            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+            new DisableObjectOnCheckTag() { ObjectPath = "Black Thread States Thread Only Variant/Normal World/Inspect Region" },
             ]
     };
 
@@ -108,7 +111,8 @@ internal static partial class BaseLocationList
         ObjectName = "Inspect Region",
         Correction = default,
         Tags = [
-            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+            new DisableObjectOnCheckTag() { ObjectPath = "inspect plink" },
             ]
     };
 
@@ -130,7 +134,8 @@ internal static partial class BaseLocationList
         ObjectName = "Black Thread States Thread Only Variant/Normal World/Group/Inspect Region",
         Correction = default,
         Tags = [
-            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+            new DisableObjectOnCheckTag() { ObjectPath = "Black Thread States Thread Only Variant/Normal World/Group/inspect plink" },
             ]
     };
 
@@ -174,7 +179,8 @@ internal static partial class BaseLocationList
         ObjectName = "Black Thread States Thread Only Variant/Normal World/Inspect Region",
         Correction = default,
         Tags = [
-            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+            new DisableObjectOnCheckTag() { ObjectPath = "Black Thread States Thread Only Variant/Normal World/inspect plink" },
             ]
     };
 
@@ -196,7 +202,8 @@ internal static partial class BaseLocationList
         ObjectName = "Inspect Region",
         Correction = default,
         Tags = [
-            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+            new DisableObjectOnCheckTag() { ObjectPath = "inspect plink" },
             ]
     };
 
@@ -218,7 +225,8 @@ internal static partial class BaseLocationList
         ObjectName = "Inspect Region (1)",
         Correction = default,
         Tags = [
-            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+            new DisableObjectOnCheckTag() { ObjectPath = "inspect plink" },
             ]
     };
 
@@ -229,7 +237,8 @@ internal static partial class BaseLocationList
         ObjectName = "Inspect Region",
         Correction = default,
         Tags = [
-            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+            new DisableObjectOnCheckTag() { ObjectPath = "inspect plink (1)" },
             ]
     };
 
@@ -240,7 +249,8 @@ internal static partial class BaseLocationList
         ObjectName = "Inspect Region (2)",
         Correction = default,
         Tags = [
-            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+            new DisableObjectOnCheckTag() { ObjectPath = "inspect plink (2)" },
             ]
     };
 
@@ -251,7 +261,9 @@ internal static partial class BaseLocationList
         ObjectName = "Inspect Region",
         Correction = default,
         Tags = [
-            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+            new DisableObjectOnCheckTag() { ObjectPath = "inspect plink" },
+            new DisableObjectOnCheckTag() { ObjectPath = "GameObject/inspect plink (1)" },
             ]
     };
 
@@ -262,7 +274,8 @@ internal static partial class BaseLocationList
         ObjectName = "Inspect Region",
         Correction = default,
         Tags = [
-            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+            new DisableObjectOnCheckTag() { ObjectPath = "inspect plink" },
             ]
     };
 
@@ -283,7 +296,8 @@ internal static partial class BaseLocationList
         ObjectName = "Grand Stage Scene/First_Stage/Post_defeat_set/trobbio_signpost/Inspect Region",
         Correction = default,
         Tags = [
-            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+            new DisableObjectOnCheckTag() { ObjectPath = "Grand Stage Scene/First_Stage/Post_defeat_set/trobbio_signpost/inspect plink" },
             ]
     };
 
@@ -294,7 +308,7 @@ internal static partial class BaseLocationList
         ObjectName = "Desk Inspect and Quill/Group/desk_inspect/Inspect Region Act 2",
         Correction = default,
         Tags = [
-            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
             ]
     };
 
@@ -350,7 +364,8 @@ internal static partial class BaseLocationList
         ObjectName = "Inspect Region",
         Correction = default,
         Tags = [
-            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+            new DisableObjectOnCheckTag() { ObjectPath = "inspect plink" },
             ]
     };
 
@@ -361,7 +376,8 @@ internal static partial class BaseLocationList
         ObjectName = "Inspect Region",
         Correction = default,
         Tags = [
-            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+            new DisableObjectOnCheckTag() { ObjectPath = "inspect plink" },
             ]
     };
 
@@ -372,7 +388,8 @@ internal static partial class BaseLocationList
         ObjectName = "Inspect Region",
         Correction = default,
         Tags = [
-            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+            new DisableObjectOnCheckTag() { ObjectPath = "inspect plink" },
             ]
     };
 
@@ -394,7 +411,8 @@ internal static partial class BaseLocationList
         ObjectName = "Black Thread States Thread Only Variant/Normal World/Inspect Region",
         Correction = default,
         Tags = [
-            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+            new DisableObjectOnCheckTag() { ObjectPath = "Black Thread States Thread Only Variant/Normal World/inspect plink" },
             ]
     };
 
@@ -416,7 +434,8 @@ internal static partial class BaseLocationList
         ObjectName = "Inspect Region",
         Correction = default,
         Tags = [
-            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+            new DisableObjectOnCheckTag() { ObjectPath = "inspect plink" },
             ]
     };
 
@@ -427,7 +446,8 @@ internal static partial class BaseLocationList
         ObjectName = "dock_b__0051_lore_sign_hang/Inspect Region",
         Correction = default,
         Tags = [
-            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+            new DisableObjectOnCheckTag() { ObjectPath = "dock_b__0051_lore_sign_hang/inspect plink" },
             ]
     };
 
@@ -438,7 +458,8 @@ internal static partial class BaseLocationList
         ObjectName = "dock_b__0051_lore_sign_hang (1)/Inspect Region",
         Correction = default,
         Tags = [
-            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+            new DisableObjectOnCheckTag() { ObjectPath = "dock_b__0051_lore_sign_hang (1)/inspect plink" },
             ]
     };
 
@@ -461,7 +482,8 @@ internal static partial class BaseLocationList
         ObjectName = "Black Thread States/Normal World/Inspect Region",
         Correction = default,
         Tags = [
-            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+            new DisableObjectOnCheckTag() { ObjectPath = "Black Thread States/Normal World/dock_b__0051_lore_sign_hang/inspect plink" },
             ]
     };
 
@@ -472,7 +494,8 @@ internal static partial class BaseLocationList
         ObjectName = "Inspect Region",
         Correction = default,
         Tags = [
-            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+            new DisableObjectOnCheckTag() { ObjectPath = "inspect plink" },
             ]
     };
 
@@ -494,7 +517,8 @@ internal static partial class BaseLocationList
         ObjectName = "Group/Inspect Region",
         Correction = default,
         Tags = [
-            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+            new DisableObjectOnCheckTag() { ObjectPath = "Group/inspect plink" },
             ]
     };
 
@@ -518,7 +542,8 @@ internal static partial class BaseLocationList
         ObjectName = "Group (5)/Inspect Region - Void Tendrils",
         Correction = default,
         Tags = [
-        new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+            new DisableObjectOnCheckTag() { ObjectPath = "inspect plink" },
         ]
     };
 
@@ -529,7 +554,8 @@ internal static partial class BaseLocationList
         ObjectName = "Inspect Region",
         Correction = default,
         Tags = [
-        new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+            new DisableObjectOnCheckTag() { ObjectPath = "inspect plink" },
         ]
     };
 
@@ -540,7 +566,8 @@ internal static partial class BaseLocationList
         ObjectName = "Inspect Region",
         Correction = default,
         Tags = [
-        new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+        new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
+        new DisableObjectOnCheckTag() { ObjectPath = "float rocks/peak_magnetite_01 (19)/inspect plink" },
         ]
     };
 
@@ -551,7 +578,7 @@ internal static partial class BaseLocationList
         ObjectName = "Inspect Region",
         Correction = default,
         Tags = [
-        new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true }
+            new OriginalContainerTag() { ContainerType = ContainerNames.Tablet, Force = true },
         ]
     };
 
@@ -561,5 +588,6 @@ internal static partial class BaseLocationList
      * Location name: Materium__Roach_Guts
      * SceneName: Dust_05
      * ObjectName: "Black Thread States Thread Only Variant/Black Thread World/Roach Guts Materium Inspect/Inspect Region"
+     * Plink: "Black Thread States Thread Only Variant/Black Thread World/Roach Guts Materium Inspect/inspect plink"
      */
 }
