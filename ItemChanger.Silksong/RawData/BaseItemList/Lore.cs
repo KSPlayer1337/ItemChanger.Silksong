@@ -90,9 +90,6 @@ internal static partial class BaseItemList
     public static Item Lore_Tablet__Greymoor_Bottom
         => CreateLoreItem(ItemNames.Lore_Tablet__Greymoor_Bottom, "Inspect", "GREY_LORE");
 
-    public static Item Lore_Tablet__Nuu_Scroll
-        => CreateLoreItem(ItemNames.Lore_Tablet__Nuu_Scroll, "Wanderers", "HUNTER_FAN_SCROLL_INSPECT");
-
     public static Item Lore_Tablet__Trobbio_Sign
         => CreateLoreItem(ItemNames.Lore_Tablet__Trobbio_Sign, "Inspect", "TROBBIO_SIGN");
 
