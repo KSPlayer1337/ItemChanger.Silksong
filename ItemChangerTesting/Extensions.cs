@@ -35,7 +35,7 @@ internal static class Extensions
             }
             else if (!target.Counter)
             {
-                quest.ModifyCompletion(c => c.CompletedCount = target.Count);
+                quest.ModifyCompletion((ref c) => c.CompletedCount = target.Count);
             }
             else
             {
