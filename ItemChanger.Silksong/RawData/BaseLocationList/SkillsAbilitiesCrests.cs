@@ -41,4 +41,10 @@ internal static partial class BaseLocationList
         SceneName = SceneNames.Belltown_Room_doctor,
         Name = LocationNames.Crest_of_Witch,
     };
+
+    public static Location Eva => new EvaLocation
+    {
+        SceneName = SceneNames.Weave_10,
+        Name = LocationNames.Eva,
+    };
 }

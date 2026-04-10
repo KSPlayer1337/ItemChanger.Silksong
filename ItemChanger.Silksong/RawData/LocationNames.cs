@@ -22,6 +22,8 @@ public static class LocationNames
     public const string Shakra__Global = "Shakra-Global";
     public const string Twelfth_Architect = "Twelfth_Architect";
     // Sells: Cogwork_Wheel, Scuttlebrace, Silkshot, Crafting_Kit, Architect's_Key
+    public const string Eva = "Eva";
+    // Sells: Crest_of_Hunter__Upgrade_1, Vesticrest_Yellow, Vesticrest_Blue, Crest_of_Hunter__Upgrade_2, Sylphsong
     public const string Vog = "Vog";
     // Sells: Flea Findings
     // Shop items:
@@ -45,7 +47,6 @@ public static class LocationNames
     public const string Needolin = "Needolin";
     public const string Silk_Soar = "Silk_Soar";
     public const string Swift_Step = "Swift_Step";
-    public const string Sylphsong = "Sylphsong";
 
     // other abilities
     public const string Drifter_s_Cloak = "Drifter's_Cloak";
@@ -80,14 +81,10 @@ public static class LocationNames
     public const string Crest_of_Cloakless = "Crest_of_Cloakless";
     public const string Crest_of_Cursed_Witch = "Crest_of_Cursed_Witch";
     public const string Crest_of_Hunter = "Crest_of_Hunter";
-    public const string Crest_of_Hunter__Upgrade_1 = "Crest_of_Hunter-Upgrade_1"; // Meeting Eva, unlock 12 slots
-    public const string Crest_of_Hunter__Upgrade_2 = "Crest_of_Hunter-Upgrade_2"; // Unlock 27 slots
     public const string Crest_of_Reaper = "Crest_of_Reaper";
     public const string Crest_of_Shaman = "Crest_of_Shaman";
     public const string Crest_of_Wanderer = "Crest_of_Wanderer";
     public const string Crest_of_Witch = "Crest_of_Witch";
-    public const string Vesticrest_Blue = "Vesticrest_Blue"; // Unlock 20 slots, adds Blue Tool slot
-    public const string Vesticrest_Yellow = "Vesticrest_Yellow"; // Unlock 12 slots, adds Yellow Tool slot
     // red tools (note: Ruined_Tool is listed with quest items; shop items: Curveclaw (Mottled_Skarr), Sting_Shard (Forge Daughter); Cogwork_Wheel is a craftmetal shop item (Twelfth Architect))
     public const string Cogfly = "Cogfly";
       //public const string Cogwork_Wheel = "Cogwork_Wheel";

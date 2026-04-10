@@ -1,4 +1,5 @@
-﻿using ItemChanger.Silksong.Util;
+﻿using ItemChanger.Extensions;
+using ItemChanger.Silksong.Util;
 using Silksong.AssetHelper.ManagedAssets;
 
 namespace ItemChanger.Silksong.Assets;
@@ -9,17 +10,20 @@ namespace ItemChanger.Silksong.Assets;
 /// </summary>
 internal class GameObjectCache : IObjectCache<GameObject>
 {
-    private Dictionary<string, ManagedAsset<GameObject>> _assets = [];
+    private List<ManagedAsset<GameObject>> _assets = [];
+    private List<ManagedAssetList<GameObject>> _assetLists = [];
+
+    private Dictionary<string, Func<GameObject, bool>> _listedAssetSelectors = new()
+    {
+        {GameObjectKeys.LORE_TABLET_WEAVER, go => go.FindChild("Inspect Region (1)") != null}
+    };
+    private Dictionary<string, Func<GameObject>> _assetGetters = [];
 
     public GameObject GetAsset(string key)
     {
-        // TODO - if using something like a ManagedAssetList to load an asset, special case it here;
-        // the asset should also be included in the load/unload methods.
-
-        if (_assets.TryGetValue(key, out ManagedAsset<GameObject> asset))
+        if (_assetGetters.TryGetValue(key, out Func<GameObject> getter))
         {
-            asset.EnsureLoaded();
-            return asset.Handle.Result;
+            return getter();
         }
 
         throw new ArgumentException($"GameObject asset with key {key} not recognized");
@@ -37,7 +41,35 @@ internal class GameObjectCache : IObjectCache<GameObject>
 
         foreach ((string key, ManagedAssetGroup<GameObject>.SceneAssetInfo info) in sceneAssetData)
         {
-            _assets[key] = ManagedAsset<GameObject>.FromSceneAsset(sceneName: info.SceneName, objPath: info.ObjPath);
+            ManagedAsset<GameObject> asset = ManagedAsset<GameObject>.FromSceneAsset(sceneName: info.SceneName, objPath: info.ObjPath);
+            _assets.Add(asset);
+            _assetGetters[key] = () =>
+            {
+                asset.EnsureLoaded();
+                return asset.Handle.Result;
+            };
+        }
+
+        if (!JsonUtils.TryDeserializeEmbeddedResource(
+            "ItemChanger.Silksong.Resources.Assets.scenegameobjectlists.json",
+            out List<SceneAssetListInfo>? sceneAssetListData))
+        {
+            throw new ArgumentException($"Could not find scene game object lists resource");
+        }
+
+        foreach (SceneAssetListInfo assetList in sceneAssetListData)
+        {
+            ManagedAssetList<GameObject> list = ManagedAssetList<GameObject>.FromSceneAsset(sceneName: assetList.SceneName, objPath: assetList.ObjPath);
+            _assetLists.Add(list);
+            foreach (string key in assetList.Keys)
+            {
+                Func<GameObject, bool> selector = _listedAssetSelectors[key];
+                _assetGetters[key] = () =>
+                {
+                    list.EnsureLoaded();
+                    return list.Handle.Result.First(selector);
+                };
+            }
         }
 
         // Load non-scene assets
@@ -51,13 +83,23 @@ internal class GameObjectCache : IObjectCache<GameObject>
 
         foreach ((string key, ManagedAssetGroup<GameObject>.NonSceneAssetInfo info) in nonSceneAssetData)
         {
-            _assets[key] = ManagedAsset<GameObject>.FromNonSceneAsset(assetName: info.AssetName, bundleName: info.BundleName);
+            ManagedAsset<GameObject> asset = ManagedAsset<GameObject>.FromNonSceneAsset(assetName: info.AssetName, bundleName: info.BundleName);
+            _assets.Add(asset);
+            _assetGetters[key] = () =>
+            {
+                asset.EnsureLoaded();
+                return asset.Handle.Result;
+            };
         }
     }
 
     public void Load()
     {
-        foreach (ManagedAsset<GameObject> asset in _assets.Values)
+        foreach (ManagedAsset<GameObject> asset in _assets)
+        {
+            asset.Load();
+        }
+        foreach (ManagedAssetList<GameObject> asset in _assetLists)
         {
             asset.Load();
         }
@@ -65,7 +107,11 @@ internal class GameObjectCache : IObjectCache<GameObject>
 
     public void Unload()
     {
-        foreach (ManagedAsset<GameObject> asset in _assets.Values)
+        foreach (ManagedAsset<GameObject> asset in _assets)
+        {
+            asset.Unload();
+        }
+        foreach (ManagedAssetList<GameObject> asset in _assetLists)
         {
             asset.Unload();
         }

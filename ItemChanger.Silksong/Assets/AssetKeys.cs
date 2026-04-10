@@ -7,6 +7,7 @@ namespace ItemChanger.Silksong.Assets;
 /// </summary>
 [JsonData("$.*~", "**/Assets/scenegameobjects.json")]
 [JsonData("$.*~", "**/Assets/nonscenegameobjects.json")]
+[JsonData("$[*].Keys[*]", "**/Assets/scenegameobjectlists.json")]
 public static partial class GameObjectKeys { }
 
 /// <summary>
