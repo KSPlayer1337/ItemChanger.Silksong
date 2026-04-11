@@ -21,9 +21,9 @@ public class DefaultBigUIDefData
     public Dictionary<string, IValueProvider<string>> TextSetters { get; init; } = [];
 
     /// <summary>
-    /// Mapping {path of game object relative to self} -> {amount to translate the object by}
+    /// Mapping {path of game object relative to self} -> {updated position (in world space)}
     /// </summary>
-    public Dictionary<string, Vector2> Offsets { get; init; } = [];
+    public Dictionary<string, Vector2> PositionOverrides { get; init; } = [];
 
     /// <summary>
     /// List of game objects (path relative to self) to deactivate.

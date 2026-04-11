@@ -1,4 +1,5 @@
 ﻿using ItemChanger.Items;
+using ItemChanger.Serialization;
 using ItemChanger.Silksong.Items;
 using ItemChanger.Silksong.Modules.CustomSkills;
 using ItemChanger.Silksong.Serialization;
@@ -195,7 +196,32 @@ internal partial class BaseItemList
         Name = ItemNames.Taunt,
         BoolName = nameof(TauntSkill.hasTaunt),
         ModuleTypeName= typeof(TauntSkill).FullName,
-        UIDef = null!
+        UIDef = new CustomDefaultBigUIDef()
+        { 
+            Fallback = new MsgUIDef()
+            {
+                Name = ItemChangerLanguageStrings.INV_NAME_TAUNT,
+                ShopDesc = ItemChangerLanguageStrings.INV_DESC_TAUNT,
+                Sprite = new ICSilksongSprite("Images.taunt_prompt")
+            },
+            Sprite = new ICSilksongSprite("Images.taunt_prompt"),
+            Data = new()
+            {
+                ActionString = GlobalEnums.HeroActionButton.TAUNT.ToString(),
+                TextSetters = new()
+                {
+                    ["Item Name"] = ItemChangerLanguageStrings.INV_NAME_TAUNT,
+                    ["Item Name Prefix"] = new LanguageString("Prompts", "GET_ITEM_INTRO1"),
+                    ["Single Prompt/Press"] = new LanguageString("Prompts", "BUTTON_DESC_PRESS"),
+                    ["Msg 1"] = ItemChangerLanguageStrings.GET_TAUNT_1,
+                    ["Msg 2"] = new BoxedString(string.Empty),
+                },
+                PositionOverrides = new()
+                {
+                    ["Stop"] = new Vector2(0, -5.7f),
+                }
+            }
+        }
     };
 
     public static Item Bind => new CustomSkillItem

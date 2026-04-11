@@ -68,7 +68,7 @@ public class CustomDefaultBigUIDef : DefaultBigUIDefBase
                     child.GetComponent<TextMeshPro>().text = provider.Value ?? string.Empty;
                 }
             }
-            foreach ((string objPath, Vector2 offset) in data?.Offsets ?? Enumerable.Empty<KeyValuePair<string, Vector2>>())
+            foreach ((string objPath, Vector2 offset) in data?.PositionOverrides ?? Enumerable.Empty<KeyValuePair<string, Vector2>>())
             {
                 GameObject? child = go.FindChild(objPath);
                 if (child == null)
@@ -77,7 +77,7 @@ public class CustomDefaultBigUIDef : DefaultBigUIDefBase
                 }
                 else
                 {
-                    child.transform.SetPosition2D((Vector2)child.transform.position + offset);
+                    child.transform.position = new Vector3(offset.x, offset.y, child.transform.position.z);
                 }
             }
             foreach (string objPath in data?.Deactivations ?? Enumerable.Empty<string>())

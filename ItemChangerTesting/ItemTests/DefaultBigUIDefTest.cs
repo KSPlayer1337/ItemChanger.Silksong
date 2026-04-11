@@ -24,7 +24,7 @@ internal class DefaultBigUIDefTest : Test
         Folder = TestFolder.ItemTests,
         MenuName = "Default Big UIDef",
         MenuDescription = "Tests the default big UI def",
-        Revision = 2026041100,
+        Revision = 2026041101,
     };
 
     public override void Setup(TestArgs args)
@@ -156,18 +156,9 @@ internal class DefaultBigUIDefTest : Test
             FlingType = ItemChanger.Enums.FlingType.Everywhere,
             ForceDefaultContainer = true,
             Managed = false,
-        }.Wrap().WithTag(new ShinyControlTag() { Info = new() { ShinyType = ItemChanger.Silksong.Containers.ShinyContainer.ShinyType.Instant } });
-
-        foreach (string itemName in (string[])[ItemNames.Cling_Grip, ItemNames.Left_Cling_Grip, ItemNames.Right_Cling_Grip])
-        {
-            tempPlacement.Add(new DebugItem()
-            {
-                Name = $"DEBUG: {itemName}",
-                UIDef = Finder.GetItem(itemName)!.UIDef,
-                Tags = [new PersistentItemTag() { Persistence = ItemChanger.Enums.Persistence.Persistent }]
-            });
-
         }
+        .Wrap()
+        .Add(Finder.GetItem(ItemNames.Taunt)!.WithTag(new PersistentItemTag() { Persistence = ItemChanger.Enums.Persistence.Persistent }));
 
         Profile.AddPlacement(tempPlacement);
     }
@@ -213,7 +204,7 @@ internal class DefaultBigUIDefTest : Test
                     ["Msg 1"] = new BoxedString("emm ess gee one"),
                     ["Msg 2"] = new BoxedString("emm ess gee two"),
                 },
-                Offsets = new()
+                PositionOverrides = new()
                 {
                     ["Stop"] = new Vector2(0, -5.7f),
                 }

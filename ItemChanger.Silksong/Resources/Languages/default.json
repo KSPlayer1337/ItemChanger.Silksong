@@ -23,6 +23,9 @@
   "INV_NAME_DOWNSLASH": "Downslash",
   "INV_DESC_ANYSLASH": "TODO",
   "INV_NAME_LORE": "Lore",
+  "INV_NAME_TAUNT": "Taunt",
+  "INV_DESC_TAUNT": "Learn the power to skip Sister Splinter",
+  "GET_TAUNT_1": "Goad enemies into attacking",
   
   "CREST_HUNTER_NAME": "Crest of Hunter",
   "CREST_HUNTER_V2_NAME": "Crest of Hunter Level 2",
