@@ -134,7 +134,7 @@ internal class DefaultBigUIDefTest : Test
 
         foreach ((string name, Item item) in BaseItemList.GetBaseItems())
         {
-            if (item.UIDef is not CascadingUIDef) continue;
+            if (item.UIDef is not CascadingUIDef { RequiredMessageType: ItemChanger.Enums.MessageType.LargePopup }) continue;
 
             finderPlacement.Add(new DebugItem()
             {
