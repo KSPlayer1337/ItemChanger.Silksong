@@ -23,6 +23,13 @@ public class ItemChangerSavedItem : Item
     {
         if (PlayerDataBoolName != null) PlayerData.instance.SetBool(PlayerDataBoolName, true);
         Item.Get();
+        // For upgraded crests, Get() already auto-equips the upgrade, but we still need to tell
+        // the HUD to update.
+        if (Item.Type == BaseGameSavedItem.ItemType.ToolCrest &&
+            !ToolItemManager.GetCrestByName(Item.Id).IsBaseVersion)
+        {
+            ToolItemManager.SendEquippedChangedEvent(force: true);
+        }
     }
 
     public override bool Redundant()
