@@ -190,6 +190,13 @@ public class ShinyContainer : Container
             HintBox box = obj.AddComponent<HintBox>();
             box.Apply(tag);
         }
+
+        if (info.CostInfo is not null)
+        {
+            CustomYNBoxInfo boxInfo = obj.AddComponent<CustomYNBoxInfo>();
+            boxInfo.Cost = info.CostInfo.Cost;
+            boxInfo.TextGetter = () => info.CostInfo.Placement.GetUIName();  // TODO - Use the items
+        }
     }
 
     /// <summary>

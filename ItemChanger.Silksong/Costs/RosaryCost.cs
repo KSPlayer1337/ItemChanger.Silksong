@@ -3,7 +3,7 @@ using ItemChanger.Silksong.Extensions;
 
 namespace ItemChanger.Silksong.Costs;
 
-public class RosaryCost(int Amount) : Cost
+public class RosaryCost(int Amount) : Cost, ICurrencyCost
 {
     /// <summary>
     /// Amount after accounting for any discount rate.
@@ -22,4 +22,8 @@ public class RosaryCost(int Amount) : Cost
     }
 
     public override bool IsFree => ActualAmount <= 0;
+
+    int ICurrencyCost.Amount => ActualAmount;
+
+    CurrencyType ICurrencyCost.CurrencyType => CurrencyType.Money;
 }

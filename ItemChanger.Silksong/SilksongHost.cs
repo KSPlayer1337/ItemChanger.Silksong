@@ -34,6 +34,7 @@ public partial class SilksongHost : ItemChangerHost
     {
         return [
             new ExactLanguageStrings(),
+            new CustomYNEnableModule(),
             new ConsistentRandomnessModule(),
             new ObstacleHandlerModule(),
             new ChapelDoorObstacleModule(),
