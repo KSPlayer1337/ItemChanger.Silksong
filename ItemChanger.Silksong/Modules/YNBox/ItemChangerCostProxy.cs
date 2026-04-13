@@ -2,15 +2,15 @@
 using ItemChanger.Silksong.Costs;
 using UnityEngine;
 
-namespace ItemChanger.Silksong.Components;
+namespace ItemChanger.Silksong.Modules.YNBox;
 
-public class ItemChangerCostOwner : SavedItem
+public class ItemChangerCostProxy : SavedItem
 {
     public Cost Cost;
 
-    public static ItemChangerCostOwner FromCost(Cost cost)
+    public static ItemChangerCostProxy FromCost(Cost cost)
     {
-        ItemChangerCostOwner owner = ScriptableObject.CreateInstance<ItemChangerCostOwner>();
+        ItemChangerCostProxy owner = ScriptableObject.CreateInstance<ItemChangerCostProxy>();
         owner.Cost = cost;
         return owner;
     }

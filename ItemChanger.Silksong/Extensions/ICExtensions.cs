@@ -38,6 +38,23 @@ internal static class ICExtensions
         return $"{prefix}-{placement.Name}-{itemSuffix}";
     }
 
+    public static string GetUIName(this Placement pmt, IEnumerable<Item> items, int maxLength = 120)
+    {
+        IEnumerable<string> itemNames = items
+            .Where(i => !i.IsObtained())
+            .Select(i => i.GetPreviewName(pmt) ?? "Unknown Item");
+        string itemText = string.Join(", ", itemNames);
+        if (itemText.Length > maxLength)
+        {
+            itemText = itemText[..(maxLength > 3 ? maxLength - 3 : 0)] + "...";
+        }
+
+        return itemText;
+    }
+
+    public static string GetUIName(this ContainerCostInfo info, int maxLength = 120)
+        => info.Placement.GetUIName(info.PreviewItems, maxLength);
+
     /// <summary>
     /// Return a value provider that returns the same object as self but strongly typed as a subclass.
     /// </summary>

@@ -3,7 +3,7 @@
 namespace ItemChanger.Silksong.Costs;
 
 /// <summary>
-/// Interface representing a cost that can (sometimes) be displayed with a sprite and an amount.
+/// Interface representing a cost that can be displayed with a sprite and an amount.
 /// </summary>
 public interface IDisplayCost
 {

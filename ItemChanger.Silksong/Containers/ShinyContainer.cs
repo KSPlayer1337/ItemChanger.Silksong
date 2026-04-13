@@ -3,6 +3,7 @@ using ItemChanger.Containers;
 using ItemChanger.Extensions;
 using ItemChanger.Silksong.Components;
 using ItemChanger.Silksong.Extensions;
+using ItemChanger.Silksong.Modules.YNBox;
 using ItemChanger.Silksong.Tags;
 using Silksong.UnityHelper.Extensions;
 using System.Diagnostics.CodeAnalysis;
@@ -195,7 +196,7 @@ public class ShinyContainer : Container
         {
             CustomYNBoxInfo boxInfo = obj.AddComponent<CustomYNBoxInfo>();
             boxInfo.Cost = info.CostInfo.Cost;
-            boxInfo.TextGetter = () => info.CostInfo.Placement.GetUIName();  // TODO - Use the items
+            boxInfo.TextGetter = () => info.CostInfo.GetUIName();
         }
     }
 

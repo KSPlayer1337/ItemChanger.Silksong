@@ -1,11 +1,11 @@
 ﻿using HarmonyLib;
 using ItemChanger.Costs;
 using ItemChanger.Modules;
-using ItemChanger.Silksong.Components;
 using ItemChanger.Silksong.Costs;
 using MonoDetour.DetourTypes;
+using MonoMod.RuntimeDetour;
 
-namespace ItemChanger.Silksong.Modules;
+namespace ItemChanger.Silksong.Modules.YNBox;
 
 /// <summary>
 /// Module that allows for InteractEvents components to send more customizable YN boxes,
@@ -26,13 +26,12 @@ public class CustomYNEnableModule : Module
 
     private ReturnFlow OverrideSavedItemDisplay(SavedItemDisplay self, ref SavedItem item, ref int amount)
     {
-        if (item is not ItemChangerCostOwner owner)
+        if (item is not ItemChangerCostProxy owner
+            || owner.Cost is IDisplayCost)
         {
-            return ReturnFlow.None;
-        }
-
-        if (owner.Cost is IDisplayCost)
-        {
+            // DisplayCosts display themselves in the normal way
+            // Restore the default text alignment
+            self.amountText.alignment = TMProOld.TextAlignmentOptions.BottomRight;
             return ReturnFlow.None;
         }
 
@@ -54,44 +53,44 @@ public class CustomYNEnableModule : Module
         // Event backing field needs reflection to access
         Action? origInteracted = AccessTools.Field(typeof(InteractEvents), nameof(InteractEvents.Interacted)).GetValue(self) as Action;
 
-        DoOpen(info.Cost.Pay + origInteracted, self.EndInteraction, info.Cost, info.TextGetter());
+        Open(origInteracted, self.EndInteraction, info.Cost, info.TextGetter());
         return ReturnFlow.SkipOriginal;
     }
 
-    public void DoOpen(Action? yes, Action? no, Cost cost, string text)
+    /// <summary>
+    /// Open a YN dialogue box that displays the provided text and cost.
+    /// </summary>
+    /// <param name="yes">Callback invoked when "yes" is selected.</param>
+    /// <param name="no">Callback invoked when "no" is selected.</param>
+    /// <param name="cost">The <see cref="Cost"/> to be paid.</param>
+    /// <param name="text">The text to diplay. This should describe what will happen when "yes" is selected.</param>
+    /// <param name="shouldPay">If true, the cost will be paid when "yes" is selected. This should be false if cost payment
+    /// is already included in the <paramref name="yes"/> delegate.</param>
+    public void Open(Action? yes, Action? no, Cost cost, string text, bool shouldPay = true)
     {
+        if (shouldPay)
+        {
+            yes = cost.Pay + yes;
+        }
+        
         if (cost is ICurrencyCost currencyCost)
         {
             DialogueYesNoBox.Open(yes, no, true, text, currencyCost.CurrencyType, currencyCost.Amount, consumeCurrency: false);
             return;
         }
 
-        // Check if the costs are all displayable
-
         List<Cost> costs = (new MultiCost(cost)).ToList();
-        List<Cost> displayableCosts = [];
-        List<Cost> nonDisplayableCosts = [];
-        foreach (Cost inner in new MultiCost(cost))
+        if (!costs.All(x => x is IDisplayCost))
         {
-            if (inner is IDisplayCost)
-            {
-                displayableCosts.Add(inner);
-            }
-            else
-            {
-                nonDisplayableCosts.Add(inner);
-            }
-        }
-
-        if (nonDisplayableCosts.Count > 0)
-        {
-            ItemChangerCostOwner costOwner = ItemChangerCostOwner.FromCost(cost);
+            ItemChangerCostProxy costOwner = ItemChangerCostProxy.FromCost(cost);
             DialogueYesNoBox.Open(yes, no, true, text, [costOwner], [1], displayHudPopup: true, consumeCurrency: false, null);
             return;
         }
 
-        List<ItemChangerCostOwner> displays = displayableCosts.Select(x => ItemChangerCostOwner.FromCost(x)).ToList();
-        List<int> amounts = displayableCosts.Cast<IDisplayCost>().Select(x => x.Amount).ToList();
+        List<IDisplayCost> displayableCosts = costs.Cast<IDisplayCost>().ToList();
+
+        List<ItemChangerCostProxy> displays = costs.Select(x => ItemChangerCostProxy.FromCost(x)).ToList();
+        List<int> amounts = displayableCosts.Select(x => x.Amount).ToList();
         DialogueYesNoBox.Open(yes, no, true, text, displays, amounts, true, false, null);
     }
 }

@@ -7,9 +7,6 @@ using ItemChanger.Silksong.Costs;
 using ItemChanger.Silksong.RawData;
 using ItemChanger.Silksong.StartDefs;
 using ItemChanger.Tags;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ItemChangerTesting.MiscTests;
 
