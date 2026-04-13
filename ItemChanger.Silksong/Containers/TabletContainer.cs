@@ -2,6 +2,8 @@
 using ItemChanger.Extensions;
 using ItemChanger.Silksong.Assets;
 using ItemChanger.Silksong.Components;
+using ItemChanger.Silksong.Extensions;
+using ItemChanger.Silksong.Modules.YNBox;
 using ItemChanger.Silksong.Util;
 using MonoDetour.DetourTypes;
 using TeamCherry.Localization;
@@ -14,7 +16,7 @@ public class TabletContainer : Container
 {
     public override string Name => ContainerNames.Tablet;
 
-    public override uint SupportedCapabilities => ContainerCapabilities.None;
+    public override uint SupportedCapabilities => ContainerCapabilities.PayCosts;
 
     public override bool SupportsInstantiate => false;
 
@@ -78,7 +80,15 @@ public class TabletContainer : Container
             self.Deactivate(false);
         };
         
-        item.Get();
+        if (info.CostInfo is null)
+        {
+            item.Get();
+        }
+        else
+        {
+            CustomYNEnableModule.Open(() => item.Get(), self.EndDialogue, info.CostInfo.Cost, info.CostInfo.GetUIName());
+        }
+        
         return ReturnFlow.SkipOriginal;
     }
 

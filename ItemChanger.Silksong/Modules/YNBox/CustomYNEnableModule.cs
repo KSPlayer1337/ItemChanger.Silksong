@@ -2,6 +2,7 @@
 using ItemChanger.Costs;
 using ItemChanger.Modules;
 using ItemChanger.Silksong.Costs;
+using ItemChanger.Silksong.Extensions;
 using MonoDetour.DetourTypes;
 
 namespace ItemChanger.Silksong.Modules.YNBox;
@@ -25,12 +26,18 @@ public class CustomYNEnableModule : Module
 
     private ReturnFlow OverrideSavedItemDisplay(SavedItemDisplay self, ref SavedItem item, ref int amount)
     {
-        if (item is not ItemChangerCostProxy costProxy
-            || costProxy.Cost is IDisplayCost)
+        // Repair any damage from before (not sure if this is necessary...)
+        self.amountText.alignment = TMProOld.TextAlignmentOptions.BottomRight;
+
+        if (item is not ItemChangerCostProxy costProxy)
         {
-            // DisplayCosts display themselves in the normal way
-            // Restore the default text alignment
-            self.amountText.alignment = TMProOld.TextAlignmentOptions.BottomRight;
+            // Not an ItemChanger Cost, so fall through to the original method
+            return ReturnFlow.None;
+        }
+
+        if (costProxy.Cost is IDisplayCost)
+        {
+            // DisplayCosts are handled via the overridden methods on ItemChangerCostProxy
             return ReturnFlow.None;
         }
 
@@ -69,27 +76,37 @@ public class CustomYNEnableModule : Module
     {
         if (shouldPay)
         {
-            yes = cost.Pay + yes;
+            yes = cost.PayIfNotPaid + yes;
         }
         
         if (cost is ICurrencyCost currencyCost)
         {
-            DialogueYesNoBox.Open(yes, no, true, text, currencyCost.CurrencyType, currencyCost.Amount, consumeCurrency: false);
+            int amount = cost.Paid ? 0 : currencyCost.Amount;
+            DialogueYesNoBox.Open(yes, no, true, text, currencyCost.CurrencyType, amount, consumeCurrency: false);
             return;
         }
 
         List<Cost> costs = (new MultiCost(cost)).ToList();
         if (!costs.All(x => x is IDisplayCost))
         {
-            ItemChangerCostProxy costOwner = ItemChangerCostProxy.FromCost(cost);
-            DialogueYesNoBox.Open(yes, no, true, text, [costOwner], [1], displayHudPopup: true, consumeCurrency: false, null);
+            ItemChangerCostProxy costProxy = ItemChangerCostProxy.FromCost(cost);
+            if (cost.Paid)
+            {
+                DialogueYesNoBox.Open(yes, no, true, text, [], [], displayHudPopup: true, consumeCurrency: false, null);
+            }
+            else
+            {
+                DialogueYesNoBox.Open(yes, no, true, text, [costProxy], [1], displayHudPopup: true, consumeCurrency: false, null);
+            }
             return;
         }
 
-        List<IDisplayCost> displayableCosts = costs.Cast<IDisplayCost>().ToList();
+        List<Cost> unpaidCosts = costs.Where(x => !x.Paid).ToList();
+        List<IDisplayCost> displayableCosts = unpaidCosts.Cast<IDisplayCost>().ToList();
 
-        List<ItemChangerCostProxy> displays = costs.Select(x => ItemChangerCostProxy.FromCost(x)).ToList();
+        List<ItemChangerCostProxy> displays = unpaidCosts.Select(x => ItemChangerCostProxy.FromCost(x)).ToList();
         List<int> amounts = displayableCosts.Select(x => x.Amount).ToList();
+
         DialogueYesNoBox.Open(yes, no, true, text, displays, amounts, true, false, null);
     }
 }

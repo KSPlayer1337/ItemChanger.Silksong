@@ -1,4 +1,5 @@
 ﻿using ItemChanger.Containers;
+using ItemChanger.Costs;
 using ItemChanger.Items;
 using ItemChanger.Placements;
 using ItemChanger.Serialization;
@@ -54,6 +55,17 @@ internal static class ICExtensions
 
     public static string GetUIName(this ContainerCostInfo info, int maxLength = 120)
         => info.Placement.GetUIName(info.PreviewItems, maxLength);
+
+    /// <summary>
+    /// Pay the cost if it has not been paid. If it has been paid, this is a no-op.
+    /// </summary>
+    public static void PayIfNotPaid(this Cost c)
+    {
+        if (!c.Paid)
+        {
+            c.Pay();
+        }
+    }
 
     /// <summary>
     /// Return a value provider that returns the same object as self but strongly typed as a subclass.

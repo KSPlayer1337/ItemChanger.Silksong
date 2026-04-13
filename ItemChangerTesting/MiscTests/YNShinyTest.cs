@@ -42,6 +42,23 @@ internal class YNShinyTest : Test
 
         Profile.AddPlacement(GetNewLocation().Wrap().WithDebugItem(persistence: ItemChanger.Enums.Persistence.Persistent));
 
+        Profile.AddPlacement(Finder
+            .GetLocation(LocationNames.Lore_Tablet__Bilewater_Above_Groal)!
+            .WithTag(new DefaultCostTag() { Cost = new RosaryCost(1300) })
+            .Wrap()
+            .WithDebugItem(persistence: ItemChanger.Enums.Persistence.Persistent)
+            );
+
+        Profile.AddPlacement(Finder
+            .GetLocation(LocationNames.Lore_Tablet__Shellwood_Harp)!
+            .WithTag(new DefaultCostTag()
+            {
+                Cost = new DisplayablePDBoolCost(nameof(PlayerData.hasNeedolin), new BoxedString("Have Needolin"), BaseAtlasSprites.Needolin)
+            })
+            .Wrap()
+            .WithDebugItem(persistence: ItemChanger.Enums.Persistence.Persistent)
+            );
+
         void TestCost(Cost cost)
         {
             Profile.AddPlacement(GetNewLocation().WithTag(new DefaultCostTag() { Cost = cost }).Wrap().WithDebugItem(persistence: ItemChanger.Enums.Persistence.Persistent));
