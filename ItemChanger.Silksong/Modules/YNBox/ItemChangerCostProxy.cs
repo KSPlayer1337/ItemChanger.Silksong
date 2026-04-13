@@ -10,9 +10,9 @@ public class ItemChangerCostProxy : SavedItem
 
     public static ItemChangerCostProxy FromCost(Cost cost)
     {
-        ItemChangerCostProxy owner = ScriptableObject.CreateInstance<ItemChangerCostProxy>();
-        owner.Cost = cost;
-        return owner;
+        ItemChangerCostProxy proxy = ScriptableObject.CreateInstance<ItemChangerCostProxy>();
+        proxy.Cost = cost;
+        return proxy;
     }
 
     public override bool CanGetMore()

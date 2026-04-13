@@ -21,7 +21,12 @@ namespace ItemChanger.Silksong.Costs
         }
     }
 
-    public class DisplayablePDBoolCost(string boolName, IValueProvider<string> costText, IValueProvider<Sprite> sprite)
+    // Note - this class probably shouldn't be used in general, as the naked icon
+    // intuitively implies a pay effect.
+    /// <summary>
+    /// Variant of <see cref="PDBoolCost"/> which supports displaying an icon.
+    /// </summary>
+    internal class DisplayablePDBoolCost(string boolName, IValueProvider<string> costText, IValueProvider<Sprite> sprite)
         : PDBoolCost(boolName, costText), IDisplayCost
     {
         public IValueProvider<Sprite> Sprite { get; init; } = sprite;

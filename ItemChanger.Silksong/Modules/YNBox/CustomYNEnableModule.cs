@@ -3,7 +3,6 @@ using ItemChanger.Costs;
 using ItemChanger.Modules;
 using ItemChanger.Silksong.Costs;
 using MonoDetour.DetourTypes;
-using MonoMod.RuntimeDetour;
 
 namespace ItemChanger.Silksong.Modules.YNBox;
 
@@ -26,8 +25,8 @@ public class CustomYNEnableModule : Module
 
     private ReturnFlow OverrideSavedItemDisplay(SavedItemDisplay self, ref SavedItem item, ref int amount)
     {
-        if (item is not ItemChangerCostProxy owner
-            || owner.Cost is IDisplayCost)
+        if (item is not ItemChangerCostProxy costProxy
+            || costProxy.Cost is IDisplayCost)
         {
             // DisplayCosts display themselves in the normal way
             // Restore the default text alignment
@@ -36,7 +35,7 @@ public class CustomYNEnableModule : Module
         }
 
         self.icon.sprite = null;
-        self.amountText.text = owner.Cost.GetCostText();
+        self.amountText.text = costProxy.Cost.GetCostText();
         self.amountText.alignment = TMProOld.TextAlignmentOptions.Bottom;
 
         return ReturnFlow.SkipOriginal;
@@ -66,7 +65,7 @@ public class CustomYNEnableModule : Module
     /// <param name="text">The text to diplay. This should describe what will happen when "yes" is selected.</param>
     /// <param name="shouldPay">If true, the cost will be paid when "yes" is selected. This should be false if cost payment
     /// is already included in the <paramref name="yes"/> delegate.</param>
-    public void Open(Action? yes, Action? no, Cost cost, string text, bool shouldPay = true)
+    public static void Open(Action? yes, Action? no, Cost cost, string text, bool shouldPay = true)
     {
         if (shouldPay)
         {
