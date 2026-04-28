@@ -1,7 +1,9 @@
 ﻿using ItemChanger.Containers;
+using ItemChanger.Costs;
 using ItemChanger.Items;
 using ItemChanger.Placements;
 using ItemChanger.Serialization;
+using Newtonsoft.Json;
 
 namespace ItemChanger.Silksong.Extensions;
 
@@ -36,15 +38,66 @@ internal static class ICExtensions
 
         return $"{prefix}-{placement.Name}-{itemSuffix}";
     }
-}
 
-file class Box<T> : IValueProvider<object> where T : struct
-{
-    public required IValueProvider<T> Source { get; init; }
-    public object Value => Source.Value;
-}
+    public static string GetUIName(this Placement pmt, IEnumerable<Item> items, int maxLength = 120)
+    {
+        IEnumerable<string> itemNames = items
+            .Where(i => !i.IsObtained())
+            .Select(i => i.GetPreviewName(pmt) ?? "Unknown Item");
+        string itemText = string.Join(", ", itemNames);
+        if (itemText.Length > maxLength)
+        {
+            itemText = itemText[..(maxLength > 3 ? maxLength - 3 : 0)] + "...";
+        }
 
-file class LiftedT<T> : IWritableValueProvider<T>
-{
-    public required T Value { get; set; }
+        return itemText;
+    }
+
+    public static string GetUIName(this ContainerCostInfo info, int maxLength = 120)
+        => info.Placement.GetUIName(info.PreviewItems, maxLength);
+
+    /// <summary>
+    /// Try to pay the given cost.
+    /// </summary>
+    /// <param name="c">The cost.</param>
+    /// <returns>True if the cost was already paid, or is paid successfully by this operation.</returns>
+    public static bool TryToPay(this Cost c)
+    {
+        if (c.Paid)
+        {
+            return true;
+        }
+        if (!c.CanPay())
+        {
+            return false;
+        }
+        c.Pay();
+        return true;
+    }
+
+    /// <summary>
+    /// Return a value provider that returns the same object as self but strongly typed as a subclass.
+    /// </summary>
+    public static IValueProvider<TDerived> Downcast<TBase, TDerived>(this IValueProvider<TBase> self) where TDerived : TBase
+    {
+        return new CastingProvider<TBase, TDerived>() { Inner = self };
+    }
+
+    private class Box<T> : IValueProvider<object> where T : struct
+    {
+        public required IValueProvider<T> Source { get; init; }
+        public object Value => Source.Value;
+    }
+
+    private class LiftedT<T> : IWritableValueProvider<T>
+    {
+        public required T Value { get; set; }
+    }
+
+    private class CastingProvider<TBase, TDerived> : IValueProvider<TDerived> where TDerived : TBase
+    {
+        public required IValueProvider<TBase> Inner { get; init; }
+
+        [JsonIgnore] public TDerived Value => (TDerived)Inner.Value!;
+    }
 }
