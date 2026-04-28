@@ -14,33 +14,7 @@ namespace ItemChanger.Silksong.RawData
         /*
 
         //tool enemy drops
-        public static Location Claw_Mirror => new ObjectLocation //dropped from trobbio
-        {
-            Name = LocationNames.Claw_Mirror,
-            SceneName = SceneNames.Library_13,
-            ObjectName = "Grand Stage Scene/Re-Entry Pickup",
-            FlingType = Enums.FlingType.Everywhere,
-            Correction = default,
-            Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
-        };
-        public static Location Claw_Mirrors => new ObjectLocation //dropped from tormented trobbio
-        {
-            Name = LocationNames.Claw_Mirrors,
-            SceneName = SceneNames.Library_13,
-            ObjectName = "Grand Stage Scene/Boss Scene TormentedTrobbio/Item Spawn/Collectable Item Pickup",
-            FlingType = Enums.FlingType.Everywhere,
-            Correction = default,
-            Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
-        };
-        public static Location Volt_Filament => new ObjectLocation //dropped from voltvyrm
-        {
-            Name = LocationNames.Volt_Filament,
-            SceneName = SceneNames.Coral_29,
-            ObjectName = "Boss Scene/Zap Core Enemy/Collectable Item Pickup",
-            FlingType = Enums.FlingType.Everywhere,
-            Correction = default,
-            Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
-        };
+        
         public static Location Weavelight => new ObjectLocation //dropped from moss mother duo
         {
             Name = LocationNames.Weavelight,

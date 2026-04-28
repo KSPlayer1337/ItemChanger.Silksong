@@ -2,12 +2,14 @@
 using ItemChanger.Locations;
 using ItemChanger.Silksong.Containers;
 using ItemChanger.Silksong.Locations;
+using ItemChanger.Silksong.Serialization;
 using ItemChanger.Silksong.Tags;
 using ItemChanger.Tags;
 
 namespace ItemChanger.Silksong.RawData
 {
     //tool locations based on shiny pickup items
+    //TO DO: wait for flea container progress to support voltvessels and volt filament and claw mirror drop locations
     internal static partial class BaseLocationList
     {
         //red tools
@@ -94,6 +96,52 @@ namespace ItemChanger.Silksong.RawData
         };
 
         //blue tools
+        public static Location Claw_Mirror => new DualLocation
+        {
+            Name = LocationNames.Claw_Mirror,
+            Test = new PDBool(nameof(PlayerData.defeatedTrobbio)),//defeated trobbio
+            TrueLocation = new ObjectLocation //defeated trobbio but left arena
+            {
+                Name = LocationNames.Claw_Mirror,
+                SceneName = SceneNames.Library_13,
+                ObjectName = "Grand Stage Scene/Re-Entry Pickup",//version that is a shiny placed on the floor
+                FlingType = Enums.FlingType.Everywhere,
+                Correction = default,
+                Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
+            },
+            FalseLocation = new ObjectLocation //has not defeated trobbio
+            {
+                Name = LocationNames.Claw_Mirror,
+                SceneName = SceneNames.Library_13,
+                ObjectName = "Grand Stage Scene/Boss Scene Trobbio/Collectable Item Pickup",//version that is dropped from trobbio
+                FlingType = Enums.FlingType.Everywhere,
+                Correction = default,
+                Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny, Force = true }] //note: flea item does not work in this location; regular items do work though
+            }
+        };
+        public static Location Claw_Mirrors => new DualLocation
+        {
+            Name = LocationNames.Claw_Mirrors,
+            Test = new PDBool(nameof(PlayerData.defeatedTormentedTrobbio)),//defeated tormented trobbio
+            TrueLocation = new ObjectLocation //defeated tormented trobbio but left arena
+            {
+                Name = LocationNames.Claw_Mirrors,
+                SceneName = SceneNames.Library_13,
+                ObjectName = "Grand Stage Scene/Re-Entry Pickup Upgrade",//version that is a shiny placed on the floor
+                FlingType = Enums.FlingType.Everywhere,
+                Correction = default,
+                Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
+            },
+            FalseLocation = new ObjectLocation //has not defeated tormented trobbio
+            {
+                Name = LocationNames.Claw_Mirrors,
+                SceneName = SceneNames.Library_13,
+                ObjectName = "Grand Stage Scene/Boss Scene TormentedTrobbio/Item Spawn/Collectable Item Pickup",//version that is dropped from tormented trobbio
+                FlingType = Enums.FlingType.Everywhere,
+                Correction = default,
+                Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny, Force = true }] //note: flea item does not work in this location; regular items do work though
+            }
+        };
         public static Location Injector_Band => new ObjectLocation
         {
             Name = LocationNames.Injector_Band,
@@ -121,6 +169,31 @@ namespace ItemChanger.Silksong.RawData
             Correction = default,
             Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
         };
+
+        public static Location Volt_Filament => new DualLocation
+        {
+            Name = LocationNames.Volt_Filament,
+            Test = new PDBool(nameof(PlayerData.defeatedZapCoreEnemy)),//defeated voltvyrm
+            TrueLocation = new ObjectLocation //defeated voltvyrm but left arena
+            {
+                Name = LocationNames.Volt_Filament,
+                SceneName = SceneNames.Coral_29,
+                ObjectName = "Boss Scene/Collectable Item Pickup",//version that is a shiny placed on the floor
+                FlingType = Enums.FlingType.Everywhere,
+                Correction = default,
+                Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
+            },
+            FalseLocation = new ObjectLocation //has not defeated voltvyrm
+            {
+                Name = LocationNames.Volt_Filament,
+                SceneName = SceneNames.Coral_29,
+                ObjectName = "Boss Scene/Zap Core Enemy/Collectable Item Pickup",//version that is dropped from voltvyrm
+                FlingType = Enums.FlingType.Everywhere,
+                Correction = default,
+                Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny, Force = true }] //note: flea item does not work in this location; regular items do work though
+            }
+        };
+
         public static Location Warding_Bell => new ObjectLocation
         {
             Name = LocationNames.Warding_Bell,
