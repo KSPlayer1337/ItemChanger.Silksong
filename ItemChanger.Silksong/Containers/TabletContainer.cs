@@ -24,7 +24,11 @@ public class TabletContainer : Container
 
     public override void ModifyContainerInPlace(GameObject obj, ContainerInfo info)
     {
-        info.ApplyTo(obj);
+        try
+        {
+            info.ApplyTo(obj);
+        }
+        catch { }
 
         BasicNPC npc = obj.GetComponent<BasicNPC>();
         npc.GiveOnFirstTalk.Clear(); // This is not strictly necessary

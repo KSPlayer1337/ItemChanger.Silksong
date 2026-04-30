@@ -147,7 +147,11 @@ public class FleaContainer : Container
     // TODO - modifying non-replaceable fleas should have a cosmetic effect where possible
     public override void ModifyContainerInPlace(GameObject obj, ContainerInfo info)
     {
-        info.ApplyTo(obj);
+        try
+        {
+            info.ApplyTo(obj);
+        }
+        catch { }
 
         if (info.GiveInfo.Placement is not IPrimaryLocationPlacement pmt)
         {

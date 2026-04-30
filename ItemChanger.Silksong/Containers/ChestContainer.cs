@@ -102,7 +102,12 @@ public class ChestContainer : Container
 
     public override void ModifyContainerInPlace(GameObject chest, ContainerInfo info)
     {
-        info.ApplyTo(chest);
+        try
+        {
+            info.ApplyTo(chest);
+        }
+        catch { }
+        
         RemoveExistingItems(chest);
         RemovePersistentData(chest);
         chest.EditFsm("Chest Control", fsm => AddGiveEffectToChestControlFsm(fsm, info));
