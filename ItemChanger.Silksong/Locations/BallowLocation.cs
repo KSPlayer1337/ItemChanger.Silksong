@@ -1,6 +1,7 @@
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using ItemChanger.Locations;
+using ItemChanger.Silksong.Modules;
 using Silksong.FsmUtil;
 
 namespace ItemChanger.Silksong.Locations;
@@ -9,6 +10,9 @@ public class BallowLocation : AutoLocation
 {
     protected override void DoLoad()
     {
+        // Diving bell module required to stop Ballow from moving to repair the diving bell
+        ActiveProfile!.Modules.GetOrAdd<DivingBellAlwaysAvailableModule>();
+
         Using(new FsmEditGroup()
         {
             { new (SceneName!, "Ballow Diving Bell NPC", "Dialogue"), HookBallow }

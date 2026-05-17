@@ -1,6 +1,9 @@
 using Benchwarp.Data;
+using ItemChanger.Silksong.Modules;
 using ItemChanger.Silksong.RawData;
+using ItemChanger.Silksong.Serialization;
 using ItemChanger.Silksong.StartDefs;
+using PrepatcherPlugin;
 
 namespace ItemChangerTesting.LocationTests;
 
@@ -16,6 +19,8 @@ internal class DivingBellKeyLocationTest : Test
 
     public override void Setup(TestArgs args)
     {
+        Modules.GetOrAdd<DivingBellAlwaysAvailableModule>();
+
         StartAt(new CoordinateStartDef()
         {
             SceneName = SceneNames.Dock_12,
@@ -26,15 +31,20 @@ internal class DivingBellKeyLocationTest : Test
         Profile.AddPlacement(Finder.GetLocation(LocationNames.Diving_Bell_Key)!.Wrap()
             .Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!)
             .Add(Finder.GetItem(ItemNames.Flea)!));
+        
+        Profile.AddPlacement(Finder.GetLocation(LocationNames.Start)!.Wrap()
+            .Add(Finder.GetItem(ItemNames.Diving_Bell_Key)!));
     }
 
     protected override void OnEnterGame()
     {
         base.OnEnterGame();
+        
+        PlayerDataAccess.blackThreadWorld = true;
+        PlayerDataAccess.act3_wokeUp = true;
+        PlayerDataAccess.act3_enclaveWakeSceneCompleted = true;
+        PlayerDataAccess.BallowMovedToDivingBell = true;
 
-        PlayerData.instance.blackThreadWorld = true;
-        PlayerData.instance.act3_wokeUp = true;
-        PlayerData.instance.act3_enclaveWakeSceneCompleted = true;
-        PlayerData.instance.BallowMovedToDivingBell = true;
+        PlayerDataAccess.hasSuperJump = true;
     }
 }
