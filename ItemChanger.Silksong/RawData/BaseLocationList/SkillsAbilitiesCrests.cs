@@ -142,9 +142,27 @@ internal static partial class BaseLocationList
         }
     );
 
-    public static Location Needolin => new WidowLocation()
+    public static Location Needolin => new DualLocation
     {
-        SceneName = SceneNames.Belltown_Shrine,
         Name = LocationNames.Needolin,
+        Test = new PDBool(nameof(PlayerData.spinnerDefeated)),
+        SceneName = SceneNames.Belltown_Shrine,
+        FlingType = Enums.FlingType.Everywhere,
+        FalseLocation = new WidowLocation 
+        {
+            Name = LocationNames.Needolin,
+            SceneName = SceneNames.Belltown_Shrine,
+            FlingType = Enums.FlingType.DirectDeposit,
+        },
+        TrueLocation = new CoordinateLocation
+        {
+            Name = LocationNames.Needolin,
+            SceneName = SceneNames.Belltown_Shrine,
+            FlingType = Enums.FlingType.Everywhere,
+            X = 55.2f,
+            Y = 8.6f,
+            ForceDefaultContainer = true,
+            Managed = false,
+        },
     };
 }
