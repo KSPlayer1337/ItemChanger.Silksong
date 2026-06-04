@@ -35,7 +35,7 @@ internal static partial class BaseLocationList
         SceneName = "Peak_06",
         ObjectName = "Heart Piece",
         Correction = default,
-        Tags = [FloatShiny] // stay floating
+        Tags = [ContactFloat] // stay floating
     };
 
     // Cogwork Core: Top of left-most tunnel after arena battle
@@ -44,8 +44,8 @@ internal static partial class BaseLocationList
         Name = LocationNames.Mask_Shard__Cogwork_Core,
         SceneName = "Song_09",
         ObjectName = "Heart Piece",
-        Correction = default,
-        Tags = [FloatShiny] //can stay floating
+        Correction = new(0f, 1.2f),
+        Tags = [InteractFloat] // float to fit to nearby scenary
     };
 
     public static Location Mask_Shard__Deep_Docks => new ObjectLocation
@@ -79,7 +79,7 @@ internal static partial class BaseLocationList
         SceneName = "Peak_04c",
         ObjectName = "Heart Piece",
         Correction = default,
-        Tags = [FloatShiny] //can stay floating
+        Tags = [ContactFloat] //can stay floating
     };
 
     public static Location Mask_Shard__Shellwood => new ObjectLocation
@@ -118,8 +118,8 @@ internal static partial class BaseLocationList
         Name = LocationNames.Mask_Shard__Wisp_Thicket,
         SceneName = "Wisp_07",
         ObjectName = "Heart Piece",
-        Correction = default,
-        Tags = [FloatShiny] // can float because it is not very noticable on the floor
+        Correction = new(0.2f, 1.4f),
+        Tags = [InteractFloat] // float to fit to nearby scenary and improve visibility
     };
 
     public static Location Mask_Shard__Wormways => new ObjectLocation

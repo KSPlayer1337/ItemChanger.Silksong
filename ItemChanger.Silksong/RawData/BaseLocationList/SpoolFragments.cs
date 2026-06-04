@@ -18,7 +18,8 @@ internal static partial class BaseLocationList
         Name = LocationNames.Spool_Fragment__Mosshome,
         SceneName = "Bone_11b",
         ObjectName = "Silk Spool",
-        Correction = default, // can fall
+        Correction = new(0, 2.2f),
+        Tags = [InteractFloat], // float to fit to nearby scenary
     };
 
     // Bone_East_13 is in the Deep Docks approach from Far Fields
@@ -35,7 +36,8 @@ internal static partial class BaseLocationList
         Name = LocationNames.Spool_Fragment__Greymoor,
         SceneName = "Greymoor_02",
         ObjectName = "Silk Spool",
-        Correction = default, // can fall
+        Correction = new(0f, 1.8f),
+        Tags = [InteractFloat], // float to fit to nearby scenary
     };
 
     // Peak_01 is The Slab: frosty section towards the left
@@ -53,7 +55,7 @@ internal static partial class BaseLocationList
         SceneName = "Weave_11",
         ObjectName = "Silk Spool",
         Correction = default,
-        Tags = [FloatShiny] // can float
+        Tags = [ContactFloat] // can float
     };
 
     public static Location Spool_Fragment__Cogwork_Core => new ObjectLocation
@@ -61,7 +63,8 @@ internal static partial class BaseLocationList
         Name = LocationNames.Spool_Fragment__Cogwork_Core,
         SceneName = "Cog_07",
         ObjectName = "Silk Spool",
-        Correction = default, // can fall
+        Correction = new(0f, 1.2f),
+        Tags = [InteractFloat], // float to fit to nearby scenary and improve visibility
     };
 
     // Library_11b is labeled Underworks (bottom-right hidden area)
@@ -70,7 +73,8 @@ internal static partial class BaseLocationList
         Name = LocationNames.Spool_Fragment__Underworks_Spikes,
         SceneName = "Library_11b",
         ObjectName = "Silk Spool",
-        Correction = default, // can fall
+        Correction = new(0f, 1.2f),
+        Tags = [InteractFloat], // float to fit to nearby scenary
     };
 
     // Song_19_entrance is the Grand Gate scene (top of Choral Chambers entrance)
@@ -79,7 +83,8 @@ internal static partial class BaseLocationList
         Name = LocationNames.Spool_Fragment__Grand_Gate,
         SceneName = "Song_19_entrance",
         ObjectName = "Silk Spool",
-        Correction = default, // can float because it would be obstructed - if we care about that
+        Correction = new(0f, 1.2f),
+        Tags = [InteractFloat], // float to fit to nearby scenary and improve visibility
     };
 
     // Underworks: behind arena battle
@@ -114,7 +119,7 @@ internal static partial class BaseLocationList
         SceneName = "Hang_03_top",
         ObjectName = "Silk Spool",
         Correction = default,
-        Tags = [FloatShiny] // can float
+        Tags = [ContactFloat] // can float
     };
 
     public static Location Spool_Fragment__Memorium => new ObjectLocation

@@ -33,7 +33,7 @@ namespace ItemChanger.Silksong.RawData
         // (same mechanic as mossberry drops), bypassing the interactEvents system which does not
         // reliably detect the player for runtime-spawned shinies. FloatInPlace keeps the shiny
         // stationary at the original object's position rather than letting it fall.
-        internal static ShinyControlTag FloatShiny => new()
+        internal static ShinyControlTag ContactFloat => new()
         {
             Info = new ShinyContainer.ShinyControlInfo
             {
@@ -41,6 +41,16 @@ namespace ItemChanger.Silksong.RawData
                 ShinyFling = ShinyContainer.ShinyFling.FloatInPlace,
             }
         };
+
+        internal static ShinyControlTag InteractFloat => new()
+        {
+            Info = new ShinyContainer.ShinyControlInfo
+            {
+                ShinyType = ShinyContainer.ShinyType.Normal,
+                ShinyFling = ShinyContainer.ShinyFling.FloatInPlace,
+            },
+        };
+
 
         public static Dictionary<string, Location> GetBaseLocations()
         {
