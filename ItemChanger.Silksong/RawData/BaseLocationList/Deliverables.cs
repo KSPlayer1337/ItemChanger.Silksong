@@ -10,5 +10,7 @@ internal static partial class BaseLocationList
     {
         SceneName = SceneNames.Mosstown_02c,
         Name = LocationNames.Mossberry_Stew,
+        FlingType = Enums.FlingType.DirectDeposit,
+        PreviewIndex = 0,
     };
 }

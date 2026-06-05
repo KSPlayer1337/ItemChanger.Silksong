@@ -44,5 +44,6 @@
 
   "FREE": "Free",
   "OBTAINED": "Obtained",
-  "PAID": "Paid"
+  "PAID": "Paid",
+  "COST_FOR": "for"
 }

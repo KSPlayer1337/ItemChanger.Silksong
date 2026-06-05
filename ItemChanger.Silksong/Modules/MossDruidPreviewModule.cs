@@ -20,11 +20,11 @@ namespace ItemChanger.Silksong.Modules;
 public class MossDruidPreviewModule : Module
 {
     [JsonIgnore]
-    private List<Placement> previewedPlacements = [];
+    private readonly List<(int, Placement)> previewedPlacements = [];
 
-    public void Add(Placement p)
+    public void Add(int previewIndex, Placement p)
     {
-        previewedPlacements.Add(p);
+        previewedPlacements.Add((previewIndex, p));
     }
 
     protected override void DoLoad()
@@ -34,6 +34,7 @@ public class MossDruidPreviewModule : Module
 
     protected override void DoUnload()
     {
+        previewedPlacements.Clear();
         GameEvents.RemoveSceneEdit(SceneNames.Mosstown_02c, SpawnTablet);
     }
 
@@ -47,7 +48,8 @@ public class MossDruidPreviewModule : Module
 
     private string BuildAndSetDescription()
     {
-        return string.Join("<br>", previewedPlacements.Select(p =>
+        IEnumerable<Placement> placements = previewedPlacements.OrderBy(p => p.Item1).Select(p => p.Item2);
+        return string.Join("<page>", placements.Select((p, i) =>
         {
             Cost? c = p is ISingleCostPlacement iscp ? iscp.Cost : null;
             string costDescription;
@@ -63,14 +65,11 @@ public class MossDruidPreviewModule : Module
             {
                 costDescription = c.GetCostText();
             }
+            string[] lines = [costDescription, "COST_FOR".GetLanguageString(), .. p.Items.Select(it => it.GetPreviewName(p) + (it.IsObtained() ? $" - {"OBTAINED".GetLanguageString()}" : ""))];
 
-            string[] itemDescriptions = p.Items
-                .Select(it => it.GetPreviewName(p) + " - " + (it.IsObtained() ? "OBTAINED".GetLanguageString() : costDescription))
-                .ToArray();
-
-            p.GetOrAddTag<PreviewRecordTag>().PreviewText = string.Join(", ", itemDescriptions);
+            p.GetOrAddTag<PreviewRecordTag>().PreviewText = string.Join(", ", lines);
             p.AddVisitFlag(VisitState.Previewed);
-            return string.Join("<br>", itemDescriptions);
+            return string.Join("<br>", lines);
         }));
     }
 }

@@ -13,6 +13,8 @@ namespace ItemChanger.Silksong.Locations;
 
 public abstract class MossDruidLocation : AutoLocation
 {
+    public required int PreviewIndex { get; init; }
+
     protected override void DoLoad()
     {
         Using(new FsmEditGroup()
@@ -21,7 +23,7 @@ public abstract class MossDruidLocation : AutoLocation
         });
         if (SupportsCost)
         {
-            ActiveProfile!.Modules.GetOrAdd<MossDruidPreviewModule>().Add(Placement!);
+            ActiveProfile!.Modules.GetOrAdd<MossDruidPreviewModule>().Add(PreviewIndex, Placement!);
         }
     }
 
