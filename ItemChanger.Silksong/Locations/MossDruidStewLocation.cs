@@ -29,7 +29,13 @@ public class MossDruidStewLocation : MossDruidLocation
         FsmState giveIngredientState = fsm.MustGetState("Give Ingredient?");
         i = giveIngredientState.IndexFirstActionOfType<CollectableItemCollect>();
         giveIngredientState.RemoveAction(i);
-        giveIngredientState.InsertLambdaMethod(i, GiveAll);
+
+        // give items earlier than vanilla, before control is returned
+        FsmState ingredientConvo = fsm.MustGetState("Ingredient Convo");
+        FsmState icGiveIngredient = fsm.AddState("IC Give Ingredient");
+        icGiveIngredient.AddTransition("FINISHED", "End");
+        ingredientConvo.ChangeTransition("CONVO_END", icGiveIngredient.Name);
+        icGiveIngredient.AddLambdaMethod(GiveAll);
     }
 
     public override bool SupportsCost => false;

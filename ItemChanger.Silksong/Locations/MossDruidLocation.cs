@@ -7,6 +7,7 @@ using ItemChanger.Silksong.Modules.YNBox;
 using ItemChanger.Silksong.Util;
 using HutongGames.PlayMaker;
 using Silksong.FsmUtil;
+using ItemChanger.Items;
 
 namespace ItemChanger.Silksong.Locations;
 
@@ -28,10 +29,22 @@ public abstract class MossDruidLocation : AutoLocation
 
     public override bool SupportsCost => true;
 
+    public override GiveInfo GetGiveInfo()
+    {
+        GiveInfo gi = base.GetGiveInfo();
+        gi.MessageType = MessageType.Any;
+        return gi;
+    }
+
     private void HookDruidWithRefreshedItems(PlayMakerFSM fsm)
     {
-        FsmState choiceState = fsm.MustGetState("Choice");
-        choiceState.InsertLambdaMethod(0, (finish) =>
+        // each location should give its refreshed items in a different state, to ensure give operations run synchronously
+        FsmState refreshedItems = fsm.AddState($"IC Give Refreshed Items - {Name}");
+        FsmState turn = fsm.MustGetState("Turn");
+        refreshedItems.AddTransition("FINISHED", turn.Transitions[0].ToState);
+        turn.ChangeTransition("FINISHED", refreshedItems.Name);
+        
+        refreshedItems.InsertLambdaMethod(0, (finish) =>
         {
             Placement!.GiveSome(Placement!.Items.Where(it => !it.IsObtained() && it.WasEverObtained()), GetGiveInfo(), finish);
         });
