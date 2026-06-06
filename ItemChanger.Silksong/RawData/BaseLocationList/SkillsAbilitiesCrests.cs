@@ -90,6 +90,12 @@ internal static partial class BaseLocationList
         Name = LocationNames.Eva,
     };
 
+    public static Location Faydown_Cloak => new FayfornLocation
+    {
+        SceneName = SceneNames.Peak_08b,
+        Name = LocationNames.Faydown_Cloak,
+    };
+
     public static Location Cross_Stitch => new DualLocation
     {
         SceneName = SceneNames.Organ_01,
