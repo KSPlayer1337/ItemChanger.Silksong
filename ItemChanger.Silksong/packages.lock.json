@@ -101,9 +101,9 @@
       },
       "Silksong.Benchwarp": {
         "type": "Direct",
-        "requested": "[1.1.5, )",
-        "resolved": "1.1.5",
-        "contentHash": "w37730EMRjzc2VnY8o1io3khw9OfELHIidZXfrKvuzPK9vtSTnizDMHeBBY7HVhALV3JUphSDEOJ19aufDoJgA==",
+        "requested": "[1.2.0, )",
+        "resolved": "1.2.0",
+        "contentHash": "2+/LYkRi1BLJMRMzX5HqxbgiVmLgRdP4wWC9KB1wrYf9uKdwgHOCkY0tZolefrokPSYYBRR2Eds/2gH7ySfMrA==",
         "dependencies": {
           "BepInEx.Core": "5.4.21",
           "HarmonyX": "2.9.0",
@@ -148,6 +148,17 @@
         "requested": "[1.4.0, )",
         "resolved": "1.4.0",
         "contentHash": "LvPs6okxm1z53RWo32XA7S3GUYWCK2n950ab7XOjp03m2Hcmus1q5tN5NCX3h0cN+k8yzM6C3BevF0SScNyDwQ==",
+        "dependencies": {
+          "BepInEx.Core": "5.4.21",
+          "HarmonyX": "2.9.0",
+          "UnityEngine.Modules": "6000.0.50"
+        }
+      },
+      "Silksong.UnityHelper": {
+        "type": "Direct",
+        "requested": "[1.2.0, )",
+        "resolved": "1.2.0",
+        "contentHash": "qneRu5HQnYPM9o4u3G09Ir4Xj2yIwIz80OREZqBko9WFVTvZcu+wKiFzGS3PoNbN8gGJIAW42s/3HPO+nQhCzQ==",
         "dependencies": {
           "BepInEx.Core": "5.4.21",
           "HarmonyX": "2.9.0",
@@ -265,16 +276,6 @@
           "Microsoft.CodeAnalysis.CSharp": "4.8.0",
           "MonoDetour": "0.7.13",
           "Silksong.UnityHelper": "1.2.0",
-          "UnityEngine.Modules": "6000.0.50"
-        }
-      },
-      "Silksong.UnityHelper": {
-        "type": "Transitive",
-        "resolved": "1.2.0",
-        "contentHash": "qneRu5HQnYPM9o4u3G09Ir4Xj2yIwIz80OREZqBko9WFVTvZcu+wKiFzGS3PoNbN8gGJIAW42s/3HPO+nQhCzQ==",
-        "dependencies": {
-          "BepInEx.Core": "5.4.21",
-          "HarmonyX": "2.9.0",
           "UnityEngine.Modules": "6000.0.50"
         }
       },
