@@ -7,6 +7,7 @@ using ItemChanger.Modules;
 using ItemChanger.Serialization;
 using ItemChanger.Silksong.FsmStateActions;
 using ItemChanger.Silksong.Serialization;
+using Newtonsoft.Json;
 using Silksong.FsmUtil;
 using UnityEngine.SceneManagement;
 
@@ -47,6 +48,12 @@ public class BellEaterBypassModule : Module
 
     private FastTravelLocations _arenaReturnLocation = FastTravelLocations.None;
 
+    /// <summary>
+    /// Used to skip the Bell Eater fight if it has already been defeated.
+    /// </summary>
+    [JsonProperty]
+    private bool BellEaterDefeated { get; set; } = false;
+
     protected override void DoLoad()
     {
         var sceneEditGroup = new SceneEditGroup();
@@ -54,6 +61,7 @@ public class BellEaterBypassModule : Module
         {
             sceneEditGroup.Add(kvp.Key, SetArenaReturnScene);
         }
+
         sceneEditGroup.Add(SceneNames.Bellway_Centipede_Arena, RemoveBellCollapse);
         Using(sceneEditGroup);
 
@@ -69,6 +77,7 @@ public class BellEaterBypassModule : Module
                 new(SceneNames.Bellway_Centipede_Arena, "Bell Beast DefeatedCentipede NPC", "Control"),
                 HookReturnFromSuccessfulFight
             },
+            { new(SceneNames.Bellway_Centipede_Arena, "Centipede Control", "Control"), TrackBellBeastDefeated }
         });
     }
 
@@ -123,12 +132,28 @@ public class BellEaterBypassModule : Module
 
         _arenaReturnLocation = fastTravelLocation;
     }
-    
+
     // Remove the bell collapse that prevents exiting the arena after Bell Eater is defeated
     private void RemoveBellCollapse(Scene scene)
     {
         EventResponder responder = scene.FindGameObject("Collapse Blocker Control")?.GetComponent<EventResponder>()!;
         responder.requireActive = true;
         responder.enabled = false;
+    }
+
+    private void TrackBellBeastDefeated(PlayMakerFSM fsm)
+    {
+        // Set flag on bell eater defeat
+        FsmState dead = fsm.MustGetState("Death Pause");
+        dead.AddLambdaMethod(_ =>
+        {
+            BellEaterDefeated = true;
+            fsm.SendEvent("FINISHED");
+        });
+
+        // Skip fight entirely if bell eater was already defeated
+        FsmState onRoomEntered = fsm.MustGetState("Set HP");
+        onRoomEntered.AddTransition("ALREADY DEFEATED", "Bell Best Appear"); // [sic]
+        onRoomEntered.AddLambdaMethod(_ => { fsm.SendEvent(BellEaterDefeated ? "ALREADY DEFEATED" : "FINISHED"); });
     }
 }
