@@ -7,6 +7,7 @@ using ItemChanger.Modules;
 using ItemChanger.Serialization;
 using ItemChanger.Silksong.FsmStateActions;
 using ItemChanger.Silksong.Serialization;
+using MonoDetour.DetourTypes;
 using Newtonsoft.Json;
 using Silksong.FsmUtil;
 using UnityEngine.SceneManagement;
@@ -76,22 +77,33 @@ public class BellEaterBypassModule : Module
             },
             { new(SceneNames.Bellway_Centipede_Arena, "Centipede Control", "Control"), TrackBellBeastDefeated }
         });
+
+        Using(Md.SceneAdditiveLoadConditional.TryTestLoad.ControlFlowPrefix(OnTestLoadBellwayCentipedeAdditive));
     }
 
     protected override void DoUnload()
     {
     }
 
+    private ReturnFlow OnTestLoadBellwayCentipedeAdditive(SceneAdditiveLoadConditional self, ref bool shouldLoad)
+    {
+        if (self.sceneNameToLoad == SceneNames.Bellway_Centipede_additive)
+        {
+            shouldLoad = true; // do the actual test in the fsm contained in the scene.
+            return ReturnFlow.SkipOriginal;
+        }
+        return ReturnFlow.None;
+    }
 
     private void HookBellwayEntrypoint(PlayMakerFSM fsm)
     {
         // Ensure Bell Eater fight entry is available
         var state = fsm.MustGetState("State");
         state.Actions = [];
-        state.AddLambdaMethod(_ => { fsm.SendEvent(BellEaterAvailable.Value ? "APPEARED" : "FINISHED"); });
+        state.AddMethod(() => { fsm.SendEvent(BellEaterAvailable.Value ? "APPEARED" : "FINISHED"); });
         var thisScene = fsm.MustGetState("This Scene?");
         thisScene.Actions = [];
-        thisScene.AddLambdaMethod(_ => { fsm.SendEvent("TRUE"); });
+        thisScene.AddMethod(() => { fsm.SendEvent("TRUE"); });
     }
 
     private void HookCallBellBeast(PlayMakerFSM fsm)
@@ -140,17 +152,16 @@ public class BellEaterBypassModule : Module
 
     private void TrackBellBeastDefeated(PlayMakerFSM fsm)
     {
-        // Set flag on bell eater defeat
-        FsmState dead = fsm.MustGetState("Death Pause");
-        dead.AddLambdaMethod(_ =>
+        // Set flag on bell eater defeat, in the same state that records journal kill
+        FsmState dead = fsm.MustGetState("Spit Head Out");
+        dead.AddMethod(() =>
         {
             BellEaterDefeated = true;
-            fsm.SendEvent("FINISHED");
         });
 
         // Skip fight entirely if bell eater was already defeated
         FsmState onRoomEntered = fsm.MustGetState("Set HP");
         onRoomEntered.AddTransition("ALREADY DEFEATED", "Bell Best Appear"); // [sic]
-        onRoomEntered.AddLambdaMethod(_ => { fsm.SendEvent(BellEaterDefeated ? "ALREADY DEFEATED" : "FINISHED"); });
+        onRoomEntered.AddMethod(() => { fsm.SendEvent(BellEaterDefeated ? "ALREADY DEFEATED" : "FINISHED"); });
     }
 }
